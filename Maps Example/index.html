@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-
+  <head>
+    <style type="text/css">
+      html, body { height: 75%; width: 75%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=	
-AIzaSyD-RJlCjCVPXtL_11kqePSQJ08gpwBYdwE
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I
         &libraries=visualization&callback=initMap">
     </script>
-  <script src="maps.js"></script>
-<script>
-function initialize() {
-  var mapProp = {
-    center:new google.maps.LatLng(51.508742,-0.120850),
-    zoom:5,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-</head>
-
-<body>
-<div id="googleMap" style="width:500px;height:500px;"></div>
-  <button>Destination Test</button>
-</body>
-
+    <script src="maps.js"> </script>
+    <button>Test Marker</button>
+  </body>
 </html>
