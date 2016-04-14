@@ -7,9 +7,6 @@ function initMap() {
     scrollwheel: false,
     zoom: 7
   });
-  
-  var test = new DirectionsService("Asheville NC", "New York NY", google.maps.TravelMode.DRIVING)
-  DirectionsService.route(test);
 
   var directionsDisplay = new google.maps.DirectionsRenderer({
     map: map
@@ -31,5 +28,3 @@ function initMap() {
     }
   });
 }
-
-
