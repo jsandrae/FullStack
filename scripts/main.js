@@ -1,3 +1,9 @@
+// Function to run on page Load
+$(document).ready(function(){
+  loginPopup();
+});
+
+
 // Function to automatically resize all elements within a resized window
 function rescaleWindow() {
     console.log("Resizing window ");
