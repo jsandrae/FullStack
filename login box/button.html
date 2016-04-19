@@ -31,7 +31,7 @@ a { font-size: 10px;
 	margin-bottom:10px;
 	margin:0 auto;
 	padding:7px;
-    background: #ffffff;  
+    background: #ffffff;
 }
   .btn-sign:hover {background:#94b8b8 ;}
 
@@ -39,8 +39,8 @@ a { font-size: 10px;
 
 #mask {
 	display: none;
-	background: #000; 
-	position: fixed; left: 0; top: 0; 
+	background: #000;
+	position: fixed; left: 0; top: 0;
 	z-index: 10;
 	width: 100%; height: 100%;
 	opacity: 0.8;
@@ -50,7 +50,7 @@ a { font-size: 10px;
 .login-popup{
 	display:none;
 	background: #94b8b8;
-	padding: 10px; 	
+	padding: 10px;
 	border: 2px solid #ddd;
 	float: left;
 	font-size: 1.2em;
@@ -60,37 +60,41 @@ a { font-size: 10px;
 
 }
 
+a.close{
+	float:right;
+	margin-right: 15px;
+}
+
 img.btn_close {
-	float: right; 
-	margin: -28px -28px 0 0;
+	margin: 50 15 0 0 ;
 }
 
-fieldset { 
-	border:none; 
+fieldset {
+	border:none;
 }
 
-form.signin .textbox label { 
-	display:block; 
-	padding-bottom:7px; 
+form.signin .textbox label {
+	display:block;
+	padding-bottom:7px;
 }
 
-form.signin .textbox span { 
+form.signin .textbox span {
 	display:block;
 }
 
-form.signin p, form.signin span { 
-	color:#ffffff; 
-	font-size:11px; 
+form.signin p, form.signin span {
+	color:#ffffff;
+	font-size:11px;
 	line-height:18px;
-} 
+}
 
-form.signin .textbox input { 
-	background:#ffffff; 
+form.signin .textbox input {
+	background:#ffffff;
 	border-bottom:1px solid #333;
 	border-left:1px solid #000;
 	border-right:1px solid #333;
 	border-top:1px solid #000;
-	color:#000000; 
+	color:#000000;
 	font:13px Arial, Helvetica, sans-serif;
 	padding:6px 6px 4px;
 	width:200px;
@@ -99,12 +103,12 @@ form.signin .textbox input {
 form.signin input:-moz-placeholder { color:#bbb; }
 form.signin input::-webkit-input-placeholder { color:#bbb; }
 
-.button { 
+.button {
 	background: -moz-linear-gradient(center top, #fff, #dddddd);
 	background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#dddddd));
 	background:  -o-linear-gradient(top, #f3f3f3, #dddddd);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f3f3f3', EndColorStr='#dddddd');
-	border-color:#000; 
+	border-color:#000;
 	border-width:1px;
 	border-radius:4px 4px 4px 4px;
 	-moz-border-radius: 4px;
@@ -114,7 +118,7 @@ form.signin input::-webkit-input-placeholder { color:#bbb; }
 	display:inline-block;
 	padding:6px 6px 4px;
 	margin-top:10px;
-	font:12px; 
+	font:12px;
 	width:214px;
 }
 
@@ -125,51 +129,51 @@ form.signin input::-webkit-input-placeholder { color:#bbb; }
 <script type="text/javascript">
 $(document).ready(function() {
 	$('a.login-window').click(function() {
-		
-		// Getting the variable's value from a link 
+
+		// Getting the variable's value from a link
 		var loginBox = $(this).attr('href');
 
 		//Fade in the Popup and add close button
 		$(loginBox).fadeIn(300);
-		
+
 		//Set the center alignment padding + border
-		var popMargTop = ($(loginBox).height() + 24) / 2; 
-		var popMargLeft = ($(loginBox).width() + 24) / 2; 
-		
-		$(loginBox).css({ 
+		var popMargTop = ($(loginBox).height() + 24) / 2;
+		var popMargLeft = ($(loginBox).width() + 24) / 2;
+
+		$(loginBox).css({
 			'margin-top' : -popMargTop,
 			'margin-left' : -popMargLeft
 		});
-		
+
 		// Add the mask to body
 		$('body').append('<div id="mask"></div>');
 		$('#mask').fadeIn(300);
-		
+
 		return false;
 	});
-	
+
 	// When clicking on the button close or the mask layer the popup closed
-	$('a.close, #mask').live('click', function() { 
+	$('a.close, #mask').live('click', function() {
 	  $('#mask , .login-popup').fadeOut(300 , function() {
-		$('#mask').remove();  
-	}); 
+		$('#mask').remove();
+	});
 	return false;
 	});
 });
 </script>
-  
+
 </head>
 <body>
 
 <div class="container">
 	<div id="content">
-    
+
 		<div class="post">
         	<div class="btn-sign">
 				<a href="#login-box" class="login-window"> Login </a>
         	</div>
 		</div>
-        
+
         <div id="login-box" class="login-popup">
         <a href="#" class="close"><img src="close.png" height=" 30px" width="30px" class="btn_close" title="Close Window" alt="Close" /></a>
           <form method="post" class="signin" action="#">
@@ -178,22 +182,22 @@ $(document).ready(function() {
                 <span>Username or email</span>
                 <input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
                 </label>
-                
+
                 <label class="password">
                 <span>Password</span>
                 <input id="password" name="password" value="" type="password" placeholder="Password">
                 </label>
-                
+
                 <button class="submit button" type="button">Sign in</button>
-                
+
                 <p>
                 <a class="forgot" href="#">Forgot your password?</a>
                 </p>
-                
+
                 </fieldset>
           </form>
 		</div>
-    
+
     </div>
 </div>
 
