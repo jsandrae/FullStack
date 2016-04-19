@@ -1,60 +1,90 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="index.css">
-        <link rel="stylesheet" type="text/css" href="style/table.css">
-        <link rel="stylesheet" type="text/css" href="style/main.css">
-        <title> Plan your Roadtrip </title>
-    </head>
-    <body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style/table.css">
+    <link rel="stylesheet" type="text/css" href="style/main.css">
+    <link rel="stylesheet" type="text/css" href="style/login.css">
+    <title> Plan your Roadtrip </title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- div element that will hold all main page elements -->
+      <div id="mainPage">
+        <img src = "assests/roadtrip2.png" height="150" width="450">
 
-  <img src = "assests/roadtrip2.png" height="150" width="450">
+        <!-- Search bar -->
+        <div id="tfheader">
+      		<form id="tfnewsearch" method="get" action="http://www.google.com">
+            <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
+      		</form>
+        	<div class="tfclear"></div>
+      	</div>
 
-<!-- Search bar -->
+        <!-- Map -->
+        <img src="assests/map.jpg" />
 
-	<div id="tfheader">
-		<form id="tfnewsearch" method="get" action="http://www.google.com">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
-		</form>
-	<div class="tfclear"></div>
-	</div>
+        <!-- Table -->
+        <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+        	<!-- Table Header -->
+        	<thead>
+        		<tr>
+        			<th>Places</th>
+        			<th>Delete</th>
+        		</tr>
+        	</thead>
+        	<!-- Table Header -->
+        	<!-- Table Body -->
+        	<tbody>
+        		<tr><!-- Table Row -->
+        			<td>First Place</td>
+        			<td>X</td>
+        		</tr><!-- Darker Table Row -->
+        		<tr class="even">
+        			<td>Second Place</td>
+        			<td>X</td>
+        		</tr>
+        		<tr>
+        			<td>3rd Place</td>
+        			<td>X</td>
+        		</tr>
+        	</tbody>
+        </table>
+        <a href="">Review and Print </a>
+      </div>
+      <!-- div element that will hold login html elements -->
+      <div id="login-box" class="login-popup">
+        <a href="#" class="close"><img src="assests/close.png" height=" 30px" width="30px"
+          class="btn_close" title="Close Window" alt="Close" /></a>
+        <form method="post" class="signin" action="#">
+          <fieldset class="textbox">
+            <label class="username">
+              <span>Username or email</span>
+              <input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
+            </label>
 
-<!-- Map -->
+            <label class="password">
+              <span>Password</span>
+              <input id="password" name="password" value="" type="password" placeholder="Password">
+            </label>
 
-      <img src="assests/map.jpg" />
+            <button class="submit button" type="button">Sign in</button>
 
-<!-- Table -->
+            <p>
+              <a class="forgot" href="#">Forgot your password?</a>
+            </p>
 
-<table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-	<!-- Table Header -->
-	<thead>
-		<tr>
-			<th>Places</th>
-			<th>Delete</th>
-		</tr>
-	</thead>
-	<!-- Table Header -->
-	<!-- Table Body -->
-	<tbody>
-
-		<tr>
-			<td>First Place</td>
-			<td>X</td>
-		</tr><!-- Table Row -->
-
-		<tr class="even">
-			<td>Second Place</td>
-			<td>X</td>
-		</tr><!-- Darker Table Row -->
-
-		<tr>
-			<td>3rd Place</td>
-			<td>X</td>
-		</tr>
-	</tbody>
-	<!-- Table Body -->
-</table>
-<a href="">Review and Print </a>
-
-    </body>
+          </fieldset>
+        </form>
+      </div>
+  		<div class="post">
+      	<div class="btn-sign">
+  				<a href="#login-box" class="login-window"> Login </a>
+      	</div>
+  		</div>
+    </div>
+    <!-- Load jQuery and our scripts -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
+    <script type="text/javascript" src="scripts/login.js"></script>
+  </body>
 </html>
