@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="style/table.css">
         <link rel="stylesheet" type="text/css" href="style/main.css">
         <title> Plan your Roadtrip </title>
     </head>
@@ -18,26 +20,41 @@
 	</div>
 
 <!-- Map -->
+
       <img src="assests/map.jpg" />
 
 <!-- Table -->
 
-<table class="table" border="1" style="width:40%">
- <th> Your Destinations </th>
-  <tr>
-    <td> Location 1</td>
-  </tr>
-  <tr>
-    <td>Location 2</td>
-  </tr>
-  <tr>
-    <td>Location 3</td>
-  </tr>
-</table>
-      <br>
-<a href="">Review and Print </a>
-      <br> <br>
+<table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+	<!-- Table Header -->
+	<thead>
+		<tr>
+			<th>Places</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	<!-- Table Header -->
+	<!-- Table Body -->
+	<tbody>
 
+		<tr>
+			<td>First Place</td>
+			<td>X</td>
+		</tr><!-- Table Row -->
+
+		<tr class="even">
+			<td>Second Place</td>
+			<td>X</td>
+		</tr><!-- Darker Table Row -->
+
+		<tr>
+			<td>3rd Place</td>
+			<td>X</td>
+		</tr>
+	</tbody>
+	<!-- Table Body -->
+</table>
+<a href="">Review and Print </a>
 
     </body>
 </html>
