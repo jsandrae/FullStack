@@ -4,6 +4,10 @@
     <link rel="stylesheet" type="text/css" href="style/table.css">
     <link rel="stylesheet" type="text/css" href="style/main.css">
     <link rel="stylesheet" type="text/css" href="style/login.css">
+  <style type="text/css">
+      
+      #map { height: 100%; }
+    </style>
     <title> Plan your Roadtrip </title>
   </head>
   <body>
@@ -24,7 +28,11 @@
       	</div>
 
         <!-- Map -->
-        <img src="assests/map.jpg" />
+         <div id="map"></div>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I&libraries=visualization&callback=initMap">
+    </script>
+   
 
         <!-- Table -->
         <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
@@ -91,5 +99,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
     <script type="text/javascript" src="scripts/login.js"></script>
+    <script type="text/javascript" src="map.js"></script>
   </body>
 </html>
