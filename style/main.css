@@ -6,10 +6,14 @@ body {
 
 #tfheader {
   padding: 10px;
-  float:right;
-  margin-top: 110px;
+  float:right 1px;
+  margin-top: 20px;
 }
 
 .table {
   margin-top: 10px;
+}
+
+.logo {
+  margin-bottom: 0px;
 }

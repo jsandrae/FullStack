@@ -10,8 +10,11 @@
     <div class="container">
       <!-- div element that will hold all main page elements -->
       <div id="mainPage">
+        
+        <div class ="logo">
         <img src = "assests/roadtrip2.png" height="150" width="450">
-
+        </div>
+        
         <!-- Search bar -->
         <div id="tfheader">
       		<form id="tfnewsearch" method="get" action="http://www.google.com">
@@ -49,8 +52,15 @@
         		</tr>
         	</tbody>
         </table>
-        <a href="">Review and Print </a>
+        
+        <!-- Review and Print Button --!>
+  		<div class="post">
+      	<div class="btn-sign">
+  				<a href="#login-box" class="login-window"> Review and Print </a>
+      	</div>
+  		</div>
       </div>
+
       <!-- div element that will hold login html elements -->
       <div id="login-box" class="login-popup">
         <a href="#" class="close"><img src="assests/close.png" height=" 30px" width="30px"
@@ -76,11 +86,6 @@
           </fieldset>
         </form>
       </div>
-  		<div class="post">
-      	<div class="btn-sign">
-  				<a href="#login-box" class="login-window"> Login </a>
-      	</div>
-  		</div>
     </div>
     <!-- Load jQuery and our scripts -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
