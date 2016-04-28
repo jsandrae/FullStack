@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <meta name="viewport" content="initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style/table.css">
     <link rel="stylesheet" type="text/css" href="style/main.css">
     <link rel="stylesheet" type="text/css" href="style/login.css">
   <style type="text/css">
       
-      #map { height: 100%; }
+      #map { width: 755px; height:400px;  }
     </style>
     <title> Plan your Roadtrip </title>
   </head>
@@ -28,11 +29,13 @@
       	</div>
 
         <!-- Map -->
-         <div id="map"></div>
+          
+          <div id="map"></div>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I&libraries=visualization&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I
+        &libraries=visualization&callback=initMap">
     </script>
-   
+
 
         <!-- Table -->
         <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
