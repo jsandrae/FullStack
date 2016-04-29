@@ -4,36 +4,31 @@
       <meta name="viewport" content="initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style/table.css">
     <link rel="stylesheet" type="text/css" href="style/main.css">
-    <link rel="stylesheet" type="text/css" href="style/login.css">
-  <style type="text/css">
-      
-      #map { width: 755px; height:400px;  }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style/button.css">
     <title> Plan your Roadtrip </title>
   </head>
   <body>
     <div class="container">
       <!-- div element that will hold all main page elements -->
       <div id="mainPage">
-        
+
         <div class ="logo">
         <img src = "assests/roadtrip2.png" height="150" width="450">
         </div>
-        
+
         <!-- Search bar -->
         <div id="tfheader">
-      		
+
             <input type="text" id="searchbox" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
-      		
+
         	<div class="tfclear"></div>
       	</div>
 
         <!-- Map -->
-          
+
           <div id="map"></div>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I
-        &libraries=visualization&libraries=places&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I&libraries=visualization&libraries=places&callback=initMap">
     </script>
 
 
@@ -63,8 +58,8 @@
         		</tr>
         	</tbody>
         </table>
-        
-        <!-- Review and Print Button --!>
+
+        <!-- Review and Print Button -->
   		<div class="post">
       	<div class="btn-sign">
   				<a href="#login-box" class="login-window"> Review and Print </a>

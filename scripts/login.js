@@ -1,9 +1,3 @@
-// Function to run on page Load
-$(document).ready(function(){
-  loginPopup();
-});
-
-
 function loginPopup() {
 	$('a.login-window').on('click',function() {
 
