@@ -84,10 +84,10 @@ storeplace = function(place) {
     storedplaces.push(place);
     var title = place.title;
     if ((tableindi+1)%2 === 0) {
-    $("tbody").append('<tr class="even"><td></td>' + title + '<td>X</td></tr>')
+    $("tbody").append('<tr class="even"><td>' + title + '</td><td>X</td></tr>')
     }
     else {
-         $("tbody").append('<tr><td></td>' + title + '<td>X</td></tr>')
+         $("tbody").append('<tr><td>' + title + '</td><td>X</td></tr>')
     }
     console.log("Sucess!");
     console.log(place.title);
