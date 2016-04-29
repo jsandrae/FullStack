@@ -1,3 +1,4 @@
+"use strict";
 //Temporary global varriables for debug purposes
 var latitude;
 var longitude;
@@ -6,12 +7,16 @@ var password;
 
 var debug=true;
 
-// Function to initialize the page and set event handlers
+/**
+ * Function to initialize the page and set event handlers
+ */
 function init(){
 
 }
 
-// Function to run on page Load
+/**
+ * Function to run on page Load
+ */
 $(document).ready(function(){
   loginPopup();
   init();
