@@ -1,5 +1,6 @@
 var storedplaces = [];
  var markers = [];
+var markerindi = -1
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 0, lng: 0},
@@ -50,7 +51,7 @@ map.addListener('bounds_changed', function() {
         anchor: new google.maps.Point(17, 34),
         scaledSize: new google.maps.Size(25, 25)
       };
-
+markerindi++
   
       markers.push(new google.maps.Marker({
         map: map,
@@ -58,12 +59,12 @@ map.addListener('bounds_changed', function() {
         title: place.name,
         position: place.geometry.location   
       }));
-          var textbox = '<button onclick="storeplace(markers[markers.length-1])">Click Me!</button>'
+          var textbox = '<button onclick="storeplace( markers[' + markerindi + '])">Click Me! I am button ' + markerindi + '</button>'
          var infowindow = new google.maps.InfoWindow({
     content: textbox
   });   
-          markers[markers.length-1].addListener('click', function() {
-    infowindow.open(map, markers[markers.length-1]);
+          markers[markerindi].addListener('click', function() {
+    infowindow.open(map, markers[markerindi]);
   });
 
       if (place.geometry.viewport) {
