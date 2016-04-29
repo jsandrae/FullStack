@@ -1,6 +1,7 @@
 var storedplaces = [];
  var markers = [];
 var markerindi = -1
+var tableindi = 0;
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 0, lng: 0},
@@ -81,6 +82,14 @@ markerindi++
 
 storeplace = function(place) {
     storedplaces.push(place);
+    var title = place.title;
+    if ((tableindi+1)%2 === 0) {
+    $("tbody").append('<tr class="even"><td></td>' + title + '<td>X</td></tr>')
+    }
+    else {
+         $("tbody").append('<tr><td></td>' + title + '<td>X</td></tr>')
+    }
     console.log("Sucess!");
-    console.log(place);
+    console.log(place.title);
+    tableindi++
 }
