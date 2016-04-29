@@ -48,9 +48,11 @@ function initMap() {
             }
 
             if (storedplaces.length > 1) {
+                var startpoint = storedplaces[0].getPosition();
+                var endpoint = storedplaces[storedplaces.length - 1].getPosition()
                 directionsService.route({
-                    origin: storedplaces[0].getPosition(),
-                    destination: storedplaces[storedplaces.length - 1].getPosition(),
+                    origin: startpoint,
+                    destination: endpoint,
                     waypoints: waypoints,
                     optimizeWaypoints: true,
                     travelMode: google.maps.TravelMode.DRIVING
@@ -86,7 +88,7 @@ function initMap() {
                 anchor: new google.maps.Point(17, 34),
                 scaledSize: new google.maps.Size(25, 25)
             };
-            markerindi++
+            markerindi++;
 
             markers.push(new google.maps.Marker({
                 map: map,
@@ -150,9 +152,12 @@ var storeplace = function (place) {
 removeplace = function (index) {
     $("#t" + index).remove();
     if (index != 0 || index != storedplaces.length - 1) {
-        waypoints.splice(1, index);
+        waypoints.splice(index, 1);
     }
-    storedplaces.splice(1, index);
+    if (index = 0) {
+        storedplaces.pop();
+    }
+    storedplaces.splice(index, 1);
     tableindi--;
     getdirections();
 
