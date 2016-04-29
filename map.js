@@ -13,11 +13,13 @@ function initMap() {
     disableDoubleClickZoom: true
   });
 
-
+var textbox = '<button type="button">Click Me!</button>'
   var input = document.getElementById('searchbox');
 var searchBox = new google.maps.places.SearchBox(input);
 
- 
+  var infowindow = new google.maps.InfoWindow({
+    content: textbox
+  });
 
 map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());
@@ -56,6 +58,10 @@ map.addListener('bounds_changed', function() {
         title: place.name,
         position: place.geometry.location   
       }));
+        
+          markers[markers.length-1].addListener('click', function() {
+    infowindow.open(map, markers[markers.length-1]);
+  });
 
       if (place.geometry.viewport) {
  
