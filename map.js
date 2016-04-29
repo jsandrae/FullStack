@@ -40,6 +40,7 @@ map.addListener('bounds_changed', function() {
       marker.setMap(null);
     });
     markers = [];
+      var markerindi = -1
 
 
     var bounds = new google.maps.LatLngBounds();
