@@ -39,9 +39,25 @@ map.addListener('bounds_changed', function() {
 
     markers.forEach(function(marker) {
       marker.setMap(null);
+  
     });
     markers = [];
-      var markerindi = -1
+                  if (storedplaces.length != 0) {
+          for(var i = 0; i < storedplaces.length; i++) {
+              markers.push(new google.maps.Marker({
+                  map: storedplaces[i].map,
+                  icon: storedplaces[i].icon,
+                  title: storedplaces[i].title,
+                  postion: storedplaces[i].postion
+              }
+                                                  )
+                           )
+          
+                   
+          }
+      }
+      var markerindi = -1 + storedplaces.length;
+
 
 
     var bounds = new google.maps.LatLngBounds();
@@ -61,13 +77,9 @@ markerindi++
         title: place.name,
         position: place.geometry.location   
       }));
-        
-        
-            var textbox = '<button onclick="storeplace( markers[' + markerindi + '])">Click Me! I am button ' + markerindi + '</button>'
-            makeinfobox(markers[markerindi], textbox);
-        
-          
-        
+
+ var textbox = '<center><p>' + markers[markerindi].title + '</p><button onclick="storeplace( markers[' + markerindi + '])">Add to Places</button></center>'
+makeinfobox(markers[markerindi], textbox);
 
       if (place.geometry.viewport) {
  
@@ -99,7 +111,7 @@ storeplace = function(place) {
          $("tbody").append('<tr id="t' + tableindi +  '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
     }
     console.log("Sucess!");
-    console.log(place.title);
+    console.log(place.getPosition());
     tableindi++
 }
 
