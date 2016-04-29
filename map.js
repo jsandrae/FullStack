@@ -93,12 +93,16 @@ storeplace = function(place) {
     storedplaces.push(place);
     var title = place.title;
     if ((tableindi+1)%2 === 0) {
-    $("tbody").append('<tr class="even"><td>' + title + '</td><td><button type="button">X</button></td></tr>')
+    $("tbody").append('<tr class="even" id="t' + tableindi +  '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
     }
     else {
-         $("tbody").append('<tr><td>' + title + '</td><td><button type="button">X</button></td></tr>')
+         $("tbody").append('<tr id="t' + tableindi +  '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
     }
     console.log("Sucess!");
     console.log(place.title);
     tableindi++
+}
+
+removeplace = function(index) {
+    $("#t" + index).remove();
 }
