@@ -44,16 +44,9 @@ map.addListener('bounds_changed', function() {
     markers = [];
                   if (storedplaces.length != 0) {
           for(var i = 0; i < storedplaces.length; i++) {
-              markers.push(new google.maps.Marker({
-                  map: storedplaces[i].map,
-                  icon: storedplaces[i].icon,
-                  title: storedplaces[i].title,
-                  postion: storedplaces[i].postion
-              }
-                                                  )
-                           )
-          
-                   
+              console.log("Sucess!");
+           markers.push(storedplaces[i]);
+              storedplaces[i].setMap(map);
           }
       }
       var markerindi = -1 + storedplaces.length;
@@ -117,4 +110,6 @@ storeplace = function(place) {
 
 removeplace = function(index) {
     $("#t" + index).remove();
+    storedplaces[index].setMap(null);
+    storedplaces.splice(1, index);
 }
