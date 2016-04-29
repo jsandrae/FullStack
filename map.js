@@ -61,13 +61,13 @@ markerindi++
         title: place.name,
         position: place.geometry.location   
       }));
-          var textbox = '<button onclick="storeplace( markers[' + markerindi + '])">Click Me! I am button ' + markerindi + '</button>'
-         var infowindow = new google.maps.InfoWindow({
-    content: textbox
-  });   
-          markers[markerindi].addListener('click', function() {
-    infowindow.open(map, markers[markerindi]);
-  });
+        
+        
+            var textbox = '<button onclick="storeplace( markers[' + markerindi + '])">Click Me! I am button ' + markerindi + '</button>'
+            makeinfobox(markers[markerindi], textbox);
+        
+          
+        
 
       if (place.geometry.viewport) {
  
@@ -77,6 +77,15 @@ markerindi++
       }
     });
     map.fitBounds(bounds);
+  });
+}
+
+makeinfobox = function(marker, message) {
+    var infowindow = new google.maps.InfoWindow({
+    content: message
+});
+    marker.addListener('click', function() {
+    infowindow.open(marker.get('map'), marker);
   });
 }
 
