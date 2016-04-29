@@ -1,5 +1,5 @@
 var storedplaces = [];
- var markers = [];
+var markers = [];
 var markerindi = -1
 var tableindi = 0;
 function initMap() {
@@ -19,15 +19,11 @@ function initMap() {
 
 
   var input = document.getElementById('searchbox');
-var searchBox = new google.maps.places.SearchBox(input);
+  var searchBox = new google.maps.places.SearchBox(input);
 
- 
-
-map.addListener('bounds_changed', function() {
+  map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());
   });
-
- 
 
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
@@ -36,22 +32,18 @@ map.addListener('bounds_changed', function() {
       return;
     }
 
-
     markers.forEach(function(marker) {
       marker.setMap(null);
-  
     });
     markers = [];
-                  if (storedplaces.length != 0) {
-          for(var i = 0; i < storedplaces.length; i++) {
-              console.log("Sucess!");
-           markers.push(storedplaces[i]);
-              storedplaces[i].setMap(map);
-          }
+    if (storedplaces.length != 0) {
+      for(var i = 0; i < storedplaces.length; i++) {
+        console.log("Sucess!");
+        markers.push(storedplaces[i]);
+        storedplaces[i].setMap(map);
       }
-      var markerindi = -1 + storedplaces.length;
-
-
+    }
+    var markerindi = storedplaces.length - 1;
 
     var bounds = new google.maps.LatLngBounds();
     places.forEach(function(place) {
@@ -62,20 +54,20 @@ map.addListener('bounds_changed', function() {
         anchor: new google.maps.Point(17, 34),
         scaledSize: new google.maps.Size(25, 25)
       };
-markerindi++
-  
+      markerindi++
+
       markers.push(new google.maps.Marker({
         map: map,
         icon: icon,
         title: place.name,
-        position: place.geometry.location   
+        position: place.geometry.location
       }));
 
- var textbox = '<center><p>' + markers[markerindi].title + '</p><button onclick="storeplace( markers[' + markerindi + '])">Add to Places</button></center>'
-makeinfobox(markers[markerindi], textbox);
+      var textbox = '<center><p>' + markers[markerindi].title + '</p><button onclick="storeplace( markers[' + markerindi + '])">Add to Places</button></center>'
+      makeinfobox(markers[markerindi], textbox);
 
       if (place.geometry.viewport) {
- 
+
         bounds.union(place.geometry.viewport);
       } else {
         bounds.extend(place.geometry.location);
@@ -85,31 +77,31 @@ makeinfobox(markers[markerindi], textbox);
   });
 }
 
-makeinfobox = function(marker, message) {
-    var infowindow = new google.maps.InfoWindow({
+var makeinfobox = function(marker, message) {
+  var infowindow = new google.maps.InfoWindow({
     content: message
-});
-    marker.addListener('click', function() {
+  });
+  marker.addListener('click', function() {
     infowindow.open(marker.get('map'), marker);
   });
 }
 
-storeplace = function(place) {
-    storedplaces.push(place);
-    var title = place.title;
-    if ((tableindi+1)%2 === 0) {
+var storeplace = function(place) {
+  storedplaces.push(place);
+  var title = place.title;
+  if ((tableindi+1)%2 === 0) {
     $("tbody").append('<tr class="even" id="t' + tableindi +  '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
-    }
-    else {
-         $("tbody").append('<tr id="t' + tableindi +  '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
-    }
-    console.log("Sucess!");
-    console.log(place.getPosition());
-    tableindi++
+  }
+  else {
+    $("tbody").append('<tr id="t' + tableindi +  '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
+  }
+  console.log("Sucess!");
+  console.log(place.getPosition());
+  tableindi++;
 }
 
 removeplace = function(index) {
-    $("#t" + index).remove();
-    storedplaces[index].setMap(null);
-    storedplaces.splice(1, index);
+  $("#t" + index).remove();
+  storedplaces[index].setMap(null);
+  storedplaces.splice(1, index);
 }
