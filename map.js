@@ -1,3 +1,5 @@
+var storedplaces = [];
+ var markers = [];
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 0, lng: 0},
@@ -13,19 +15,17 @@ function initMap() {
     disableDoubleClickZoom: true
   });
 
-var textbox = '<button type="button">Click Me!</button>'
+
   var input = document.getElementById('searchbox');
 var searchBox = new google.maps.places.SearchBox(input);
 
-  var infowindow = new google.maps.InfoWindow({
-    content: textbox
-  });
+ 
 
 map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());
   });
 
-  var markers = [];
+ 
 
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
@@ -51,14 +51,17 @@ map.addListener('bounds_changed', function() {
         scaledSize: new google.maps.Size(25, 25)
       };
 
-    
+  
       markers.push(new google.maps.Marker({
         map: map,
         icon: icon,
         title: place.name,
         position: place.geometry.location   
       }));
-        
+          var textbox = '<button onclick="storeplace(markers[markers.length-1])">Click Me!</button>'
+         var infowindow = new google.maps.InfoWindow({
+    content: textbox
+  });   
           markers[markers.length-1].addListener('click', function() {
     infowindow.open(map, markers[markers.length-1]);
   });
@@ -72,4 +75,10 @@ map.addListener('bounds_changed', function() {
     });
     map.fitBounds(bounds);
   });
+}
+
+storeplace = function(place) {
+    storedplaces.push(place);
+    console.log("Sucess!");
+    console.log(place);
 }
