@@ -31,7 +31,7 @@ class User(Document):
     structure = {
         'username': unicode,
         'password': unicode,
-        'creation_date': datetime.datetime,
+        'creation_date': datetime.datetime.utcnow
     }
     validators = {
         'username': max_length(20),
@@ -41,17 +41,13 @@ class User(Document):
     def __repr__(self):
         return '<User %r>' % (self.username)
 
-class Trips(Document):
+class Trip(Document):
     __collection__ = 'full_stack'
-    __database__ = 'users'
+    __database__ = 'trips'
     structure = {
         'username': unicode,
-        'password': unicode,
-        'creation_date': datetime.datetime,
-    }
-    validators = {
-        'username': max_length(20),
-        'password': max_length(15)
+        'trip': dict,
+        'creation_date': datetime.datetime.utcnow
     }
     use_dot_notation = True
 
