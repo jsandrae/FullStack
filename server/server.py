@@ -4,7 +4,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, jsonify
 from contextlib import closing
 from mongokit import Connection, Document
-import time
+import datetime
 
 # configuration
 MONGODB_HOST = 'localhost'
@@ -26,17 +26,20 @@ def max_length(length):
     return validate
 
 class User(Document):
+    __collection__ = 'full_stack'
+    __database__ = 'users'
     structure = {
         'username': unicode,
         'password': unicode,
+        'creation_date': datetime.datetime,
     }
     validators = {
-        'name': max_length(20),
-        'email': max_length(15)
+        'username': max_length(20),
+        'password': max_length(15)
     }
     use_dot_notation = True
     def __repr__(self):
-        return '<User %r>' % (self.name)
+        return '<User %r>' % (self.username)
 
 # register the User document with our current connection
 connection.register([User])
@@ -76,9 +79,6 @@ def get_log():
 def initiate_feeding(name):
     # perform feeding
     print name
-    on.turn_on()
-    time.sleep(2) #delay for 0.1 seconds
-    off.turn_off()
     #log feeding in database
     g.db.execute('INSERT INTO feedingLog (username) VALUES (?)', [name])
     g.db.commit()

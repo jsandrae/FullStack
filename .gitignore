@@ -1,3 +1,4 @@
 # Virtual Environment for Flask
 /venv
 start.bat
+server/server.pyc
