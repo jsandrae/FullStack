@@ -173,7 +173,7 @@ var storeplace = function (place) {
         markers[i].setMap(null);
     }
     console.log(place.getPosition());
-
+    console.log(place)
 
 
     getdirections();
