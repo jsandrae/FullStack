@@ -7,8 +7,8 @@ function initMap() {
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 0, lng: 0},
-        zoom: 3,
+        center: {lat: 37.0902, lng: -95.7129},
+        zoom: 4,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         styles: [{
                 featureType: 'poi',
@@ -160,7 +160,7 @@ var storeplace = function (place) {
 removeplace = function (index) {
     
     $("#t" + index).remove();
-    if (index != 0 && index != storedplaces.length - 1) {
+    if (index !== 0 && index !== storedplaces.length - 1) {
         waypoints.splice(index, 1);
     };
     storedplaces.splice(index, 1);
