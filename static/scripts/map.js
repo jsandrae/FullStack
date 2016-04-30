@@ -1,8 +1,9 @@
 var storedplaces = [];
 var markers = [];
 var markerindi = -1
-var tableindi = 0;
+var tableIndex = 0;
 var waypoints = [];
+var myStoredPlaces = {};
 function initMap() {
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -136,13 +137,35 @@ var makeinfobox = function (marker, message) {
         infowindow.open(marker.get('map'), marker);
     });
 }
-
+/**
+ * Function to take a given geoJSON object and add it to the overall place object
+ * @param place: geoJSON object with identifing information regarding the saved place
+ */
+var myStorePlace = function (place){
+  // Create a new id for this object
+  var newID = '#id'+tableIndex++;
+  var title = place.title;
+  var $newRow = $("<tr>").addClass('place'); //create a new table row of class place
+  $($newRow).attr('id',newID); // add the new id to row
+  var $name = $('<td>').text(' '+ title +' ');
+  var $remove = $('<td>').text(' X ');
+  // add event handler for removing row from table and data from place object
+  $($remove).on('click', function(){
+    // remove table from row
+    $(newID).hide(100);
+    delete myStoredPlaces[newID];
+  });
+  // add elements to row
+  $newRow.append($name,$remove);
+  $('tbody').append($newRow);
+  //other stuff
+}
 
 var storeplace = function (place) {
     storedplaces.push(place);
-    tableindi++;
+    tableIndex++;
     var title = place.title;
-    $("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
+    $("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableIndex + ')">X</button></td></tr>')
     console.log("Sucess!");
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -166,21 +189,19 @@ var removeplace = function (index) {
             storedplaces.splice(i, 1);
         }
     }
-    for (var i = index; i < tableindi; i++) {
+    for (var i = index; i < tableIndex; i++) {
         //$('.place:nth-child(' + (index + 1 ) + ')').find('button').remove();
         $('.place:nth-child(' + (index + 1 ) + ')').find('button').off('onclick').attr('click', '"removeplace(213132)"');
         //$('.place:nth-child(' + (index + 1 ) + ')').find('button').remove();
                 //.attr('onclick', 'removeplace(' + 214717414 + ')')
-       
+
         $('#your_element').attr('id','the_new_id');
 
     }
 
 
 
-    tableindi--;
+    tableIndex--;
     getdirections();
 
 }
-
-      
