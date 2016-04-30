@@ -167,7 +167,8 @@ var storeplace = function (place) {
     storedplaces.push(place);
     tableIndex++;
     var title = place.title;
-    $("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableIndex + ')">X</button></td></tr>')
+    myStorePlace(place);
+    //$("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableIndex + ')">X</button></td></tr>')
     console.log("Sucess!");
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
