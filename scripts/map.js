@@ -1,7 +1,7 @@
 var storedplaces = [];
 var markers = [];
 var markerindi = -1
-var tableindi = 0;
+var tableindi = -1;
 var waypoints = [];
 function initMap() {
     var directionsService = new google.maps.DirectionsService;
@@ -140,9 +140,10 @@ var makeinfobox = function (marker, message) {
 
 var storeplace = function (place) {
     storedplaces.push(place);
+     tableindi++;
     var title = place.title;
     if ((tableindi + 1) % 2 === 0) {
-        $("tbody").append('<tr class="even" id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
+        $("tbody").append('<tr id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
     } else {
         $("tbody").append('<tr id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' +  tableindi + ')">X</button></td></tr>')
     }
@@ -153,17 +154,23 @@ var storeplace = function (place) {
     console.log(place.getPosition());
 
 
-    tableindi++;
+   
     getdirections();
 }
 
 removeplace = function (index) {
-    
+    debugger
     $("#t" + index).remove();
     if (index !== 0 && index !== storedplaces.length - 1) {
         waypoints.splice(index, 1);
     };
     storedplaces.splice(index, 1);
+   
+        for(var i = index; i < tableindi-1; i++) {
+            $("#t" + (i + 1)).attr('id', 't' + index)
+            $("#t" + (i + 1)).attr('onclick', '"removeplace(' + i + ')"' )
+        }
+    
     tableindi--;
     getdirections();
 

@@ -76,7 +76,7 @@ table td {
 	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
 	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
 }
-table tr.even td {
+table tr:nth-child(even) td {
 	background: #f6f6f6;
 	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
 	background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
