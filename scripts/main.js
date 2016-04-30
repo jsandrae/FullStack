@@ -14,7 +14,7 @@ function init(){
 
 }
 
-function dismissLogin(username, password){
+function validateLogin(username, password){
   return false;
 }
 
