@@ -38,7 +38,7 @@ function initMap() {
 
         getdirections = function () {
             if (storedplaces.length > 2) {
-                
+
                 for (var i = 1; i < storedplaces.length - 1; i++) {
                     waypoints.push({
                         location: storedplaces[i].getPosition(),
@@ -46,13 +46,12 @@ function initMap() {
                     })
 
                 }
-            }
-            else {
+            } else {
                 waypoints = [];
             }
 
             if (storedplaces.length > 1) {
-                 directionsDisplay.setMap(map)
+                directionsDisplay.setMap(map)
                 var startpoint = storedplaces[0].getPosition();
                 var endpoint = storedplaces[storedplaces.length - 1].getPosition()
                 directionsService.route({
@@ -72,8 +71,7 @@ function initMap() {
                         window.alert('Directions request failed due to ' + status);
                     }
                 })
-            }
-            else {
+            } else {
                 directionsDisplay.setMap(null)
             }
 
@@ -140,13 +138,10 @@ var makeinfobox = function (marker, message) {
 
 var storeplace = function (place) {
     storedplaces.push(place);
-     tableindi++;
+    tableindi++;
     var title = place.title;
-    if ((tableindi + 1) % 2 === 0) {
-        $("tbody").append('<tr id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
-    } else {
-        $("tbody").append('<tr id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' +  tableindi + ')">X</button></td></tr>')
-    }
+    $("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
+
     console.log("Sucess!");
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -154,23 +149,24 @@ var storeplace = function (place) {
     console.log(place.getPosition());
 
 
-   
+
     getdirections();
 }
 
 removeplace = function (index) {
     debugger
-    $("#t" + index).remove();
+    $('.place:nth-child(' + (index + 1) + ')').remove();
     if (index !== 0 && index !== storedplaces.length - 1) {
         waypoints.splice(index, 1);
-    };
+    }
+    ;
     storedplaces.splice(index, 1);
-   
-        for(var i = index; i < tableindi-1; i++) {
-            $("#t" + (i + 1)).attr('id', 't' + index)
-            $("#t" + (i + 1)).attr('onclick', '"removeplace(' + i + ')"' )
-        }
-    
+
+    for (var i = index; i < tableindi - 1; i++) {
+        $("#t" + (i + 1)).attr('id', 't' + index)
+        $("#t" + (i + 1)).attr('onclick', '"removeplace(' + i + ')"')
+    }
+
     tableindi--;
     getdirections();
 
