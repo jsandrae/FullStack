@@ -158,7 +158,7 @@ var storeplace = function (place) {
 }
 
 removeplace = function (index) {
-    debugger
+    
     $("#t" + index).remove();
     if (index != 0 && index != storedplaces.length - 1) {
         waypoints.splice(index, 1);
