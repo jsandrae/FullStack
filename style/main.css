@@ -37,6 +37,7 @@ a {
   width: 100%;
   margin: 0 8%;
   overflow: hidden;
+  background-image: url("../assests/mapback.jpg")
 }
 
 #content {
