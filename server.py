@@ -9,10 +9,13 @@ import datetime
 # configuration
 MONGODB_HOST = 'localhost'
 MONGODB_PORT = 27017
+SECRET_KEY = 'this is the Test Development Key for the project!'
+
+#FULLSTACK_SETTINGS = '/settings.py'
 
 # create application
 app = Flask(__name__)
-app.config.from_object(__name__)
+#app.config.from_envvar('FULLSTACK_SETTINGS', silent=True)
 
 # setup connection for database
 connection = Connection(app.config['MONGODB_HOST'],
