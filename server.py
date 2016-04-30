@@ -15,6 +15,7 @@ SECRET_KEY = 'this is the Test Development Key for the project!'
 
 # create application
 app = Flask(__name__)
+app.config.from_object(__name__)
 #app.config.from_envvar('FULLSTACK_SETTINGS', silent=True)
 
 # setup connection for database
@@ -34,7 +35,6 @@ class User(Document):
     structure = {
         'username': unicode,
         'password': unicode,
-        'creation_date': datetime.datetime.utcnow
     }
     validators = {
         'username': max_length(20),
@@ -50,7 +50,6 @@ class Trip(Document):
     structure = {
         'username': unicode,
         'trip': dict,
-        'creation_date': datetime.datetime.utcnow
     }
     use_dot_notation = True
 
@@ -59,7 +58,8 @@ connection.register([User])
 
 # function to display index page
 @app.route('/')
-def index()
+def index():
+    return render_template('index.html')
 
 # function to return entire log from database
 @app.route('/log')
