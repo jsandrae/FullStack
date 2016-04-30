@@ -15,7 +15,7 @@ function init(){
 }
 
 function dismissLogin(username, password){
-  
+  return false;
 }
 
 /**
