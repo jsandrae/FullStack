@@ -30,9 +30,7 @@ function loginPopup() {
 		} else { // else save trip to user
 
 		}
-
-
-
+		
 		return false;
 	});
 

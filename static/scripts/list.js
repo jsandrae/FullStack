@@ -1,19 +1,27 @@
 function tieSignIn(){
-  $('button#signInButton') .on('click',function() {
-
+  $('button#signInButton').on('click',function() {
+    // remove any previously added messages
+    $('.incorrectMessage').fadeOut(5);
     //Saving the username and password
-    var username;
-    var password;
+    var $username = $('#username');
+    var $password = $('#password');
 
-    username = $('#username').text;
-    password = $('#password').text;
+    var username = $('#username').val();
+    var password = $('#password').val();
+
+    console.log('$username:')
+    console.log($username)
+    console.log('username:')
+    console.log(username)
 
     var isValid = validateLogin(username,password);
 
     if (isValid) {
       $('#login-box').fadeOut(300);}
     else {
-      var $incorrect = $('<p>');
+      // remove password from text field
+      $password.text('');
+      var $incorrect = $('<p>').attr('class','incorrectMessage');
       $incorrect.text('Sorry, incorrect login.');
       $incorrect.insertBefore($('#signInButton'));
     }
