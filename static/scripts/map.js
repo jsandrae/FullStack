@@ -143,7 +143,7 @@ var makeinfobox = function (marker, message) {
  */
 var myStorePlace = function (place){
   // Create a new id for this object
-  var newID = '#id'+tableIndex++;
+  var newID = 'id'+tableIndex++;
   var title = place.title;
   var $newRow = $("<tr>").addClass('place'); //create a new table row of class place
   $($newRow).attr('id',newID); // add the new id to row
@@ -153,8 +153,9 @@ var myStorePlace = function (place){
   myStoredPlaces[newID] = place;
   // add event handler for removing row from table and data from place object
   $($remove).on('click', function(){
+    console.log('clicked')
     // remove table from row
-    $(newID).hide(100);
+    $('#'+newID).hide(100);
     delete myStoredPlaces[newID];
   });
   // add elements to row
