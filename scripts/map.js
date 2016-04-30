@@ -143,7 +143,6 @@ var storeplace = function (place) {
     tableindi++;
     var title = place.title;
     $("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
-
     console.log("Sucess!");
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -165,7 +164,7 @@ removeplace = function (index) {
     storedplaces.splice(index, 1);
 
     for (var i = index; i < tableindi - 1; i++) {
-        $('.place:nth-child(' + (index + 1) + ')').attr('onclick', '"removeplace(' + i + ')"')
+        $('.place:nth-child(' + (i + 1) + ')').attr('onclick', '"removeplace(' + i + ')"')
     }
 
     tableindi--;
