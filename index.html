@@ -9,7 +9,7 @@
     <title> Plan your Roadtrip </title>
   </head>
   <body>
-    
+
     <div class="container">
       <!-- div element that will hold all main page elements -->
       <div id="mainPage">
@@ -25,30 +25,29 @@
 
         	<div class="tfclear"></div>
       	</div>
+    <div id="importantStuff">
+      <!-- Map -->
+      <div id="map"></div>
+      <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I&libraries=visualization&libraries=places&callback=initMap">
+      </script>
 
-        <!-- Map -->
+      <!-- Table -->
+      <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+      	<!-- Table Header -->
+      	<thead>
+      		<tr>
+      			<th>Places</th>
+      			<th>Delete</th>
+      		</tr>
+      	</thead>
+      	<!-- Table Header -->
+      	<!-- Table Body -->
+      	<tbody>
 
-          <div id="map"></div>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I&libraries=visualization&libraries=places&callback=initMap">
-    </script>
-
-
-        <!-- Table -->
-        <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-        	<!-- Table Header -->
-        	<thead>
-        		<tr>
-        			<th>Places</th>
-        			<th>Delete</th>
-        		</tr>
-        	</thead>
-        	<!-- Table Header -->
-        	<!-- Table Body -->
-        	<tbody>
-
-        	</tbody>
-        </table>
+      	</tbody>
+      </table>
+    </div>
 
         <!-- Review and Print Button -->
   		<div class="post">
