@@ -22,19 +22,20 @@
   background:#ffe6cc;
 }
 
+
 .btn-sign {
 	width: 80px;
     height: 35px;
 	margin-bottom:10px;
-    background: #ffffff;
+    background: #ddd1e7;
 }
 
 .btn-sign:hover {
-  background:#94b8b8;
+  background:#bba3d0;
 }
 
 .btn-sign a {
-  color:#555555;
+  color:#2f4f4f;
 	width: 100%;
 	height: 100%;
 	margin: auto;

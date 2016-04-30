@@ -12,7 +12,7 @@ body {
 
 #importantStuff{
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .logo {
@@ -35,7 +35,7 @@ a {
 
 .container {
   width: 100%;
-  margin: 0 5%;
+  margin: 0 8%;
   overflow: hidden;
 }
 
@@ -45,10 +45,11 @@ a {
 }
 
 .post {
-  margin: 0 auto;
-  padding-bottom: 50px;
-  float: left;
-  width: 960px;
+    width: 25%;
+    float: left;
+    margin-left: 5%;
+    padding-top: 2%;
+    position: relative;
 }
 
 #map {
