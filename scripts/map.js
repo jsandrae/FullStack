@@ -19,7 +19,7 @@ function initMap() {
             }],
         disableDoubleClickZoom: true
     });
-    directionsDisplay.setMap(map)
+    directionsDisplay.setMap(null)
 
     var input = document.getElementById('searchbox');
     var searchBox = new google.maps.places.SearchBox(input);
@@ -38,6 +38,7 @@ function initMap() {
 
         getdirections = function () {
             if (storedplaces.length > 2) {
+                
                 for (var i = 1; i < storedplaces.length - 1; i++) {
                     waypoints.push({
                         location: storedplaces[i].getPosition(),
@@ -46,8 +47,12 @@ function initMap() {
 
                 }
             }
+            else {
+                waypoints = [];
+            }
 
             if (storedplaces.length > 1) {
+                 directionsDisplay.setMap(map)
                 var startpoint = storedplaces[0].getPosition();
                 var endpoint = storedplaces[storedplaces.length - 1].getPosition()
                 directionsService.route({
@@ -67,6 +72,9 @@ function initMap() {
                         window.alert('Directions request failed due to ' + status);
                     }
                 })
+            }
+            else {
+                directionsDisplay.setMap(null)
             }
 
         }
@@ -136,7 +144,7 @@ var storeplace = function (place) {
     if ((tableindi + 1) % 2 === 0) {
         $("tbody").append('<tr class="even" id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
     } else {
-        $("tbody").append('<tr id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
+        $("tbody").append('<tr id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' +  tableindi + ')">X</button></td></tr>')
     }
     console.log("Sucess!");
     for (var i = 0; i < markers.length; i++) {
@@ -150,13 +158,11 @@ var storeplace = function (place) {
 }
 
 removeplace = function (index) {
+    debugger
     $("#t" + index).remove();
-    if (index != 0 || index != storedplaces.length - 1) {
+    if (index != 0 && index != storedplaces.length - 1) {
         waypoints.splice(index, 1);
-    }
-    if (index = 0) {
-        storedplaces.pop();
-    }
+    };
     storedplaces.splice(index, 1);
     tableindi--;
     getdirections();
