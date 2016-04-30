@@ -57,6 +57,10 @@ class Trip(Document):
 # register the User document with our current connection
 connection.register([User])
 
+# function to display index page
+@app.route('/')
+def index()
+
 # function to return entire log from database
 @app.route('/log')
 def get_log():
