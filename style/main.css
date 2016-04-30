@@ -25,6 +25,10 @@ a {
 	color:#ffffff;
 }
 
+.hidden {
+  display: none;
+}
+
 .container {
   width: 960px;
   margin: 0 auto;

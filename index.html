@@ -54,34 +54,38 @@
       	<div class="btn-sign">
   				<a href="#login-box" class="login-window"> Review and Print </a>
       	</div>
+        <div class="btn-sign">
+          <a href="#trip-box" class="trip-window"> Trip Debug </a>
+        </div>
   		</div>
-      </div>
-      
-      
-      <!--review box --> 
-      
+
+      <!--review box -->
+
       <a href="#openModal">Open </a>
 
-<div id="openModal" class="modalDialog">
-    <div>	<a href="#close" title="Close" class="close">X</a>
+      <div id="trip-box" class="modalDialog hidden">
+        <div>
+          <a href="#close" title="Close" class="modalTrips">X</a>
 
         	<h2>Your Trip Overview:</h2>
 
-        <p> <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-        	<!-- Table Header -->
-        	<thead>
-        		<tr>
-        			<th>Places</th>
-        			<th>Delete</th>
-        		</tr>
-        	</thead>
-        	<!-- Table Header -->
-        	<!-- Table Body -->
-        	<tbody>
+          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+          	<!-- Table Header -->
+          	<thead>
+          		<tr>
+          			<th>Places</th>
+          			<th>Delete</th>
+          		</tr>
+          	</thead>
+          	<!-- Table Header -->
+          	<!-- Table Body -->
+          	<tbody>
 
-        	</tbody>
-        </table>
-    </div>
+          	</tbody>
+          </table>
+        </div>
+      </div>
+
 
       <!-- div element that will hold login html elements -->
       <div id="login-box" class="login-popup">

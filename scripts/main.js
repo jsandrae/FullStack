@@ -11,7 +11,9 @@ var debug=true;
  * Function to initialize the page and set event handlers
  */
 function init(){
-
+  $("a.trip-window").on('click',function(){
+    $('#trip-box').fadeIn(300);
+  });
 }
 
 function validateLogin(username, password){
