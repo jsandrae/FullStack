@@ -1,9 +1,10 @@
-var storedplaces = [];
+
 var markers = [];
 var markerindi = -1
 var tableIndex = 0;
 var waypoints = [];
 var myStoredPlaces = {};
+var myStoredPlacesNames = [];
 function initMap() {
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -30,6 +31,7 @@ function initMap() {
     });
 
     searchBox.addListener('places_changed', function () {
+        
         var places = searchBox.getPlaces();
 
         if (places.length === 0) {
@@ -38,13 +40,13 @@ function initMap() {
 
 
         getdirections = function () {
-
+ debugger
             waypoints = [];
-            if (storedplaces.length > 2) {
+            if (myStoredPlacesNames.length > 2) {
 
-                for (var i = 1; i < storedplaces.length - 1; i++) {
+                for (var i = 1; i < myStoredPlacesNames.length - 1; i++) {
                     waypoints.push({
-                        location: storedplaces[i].getPosition(),
+                        location: myStoredPlaces[myStoredPlacesNames[i]].getPosition(),
                         stopover: true
                     })
 
@@ -53,10 +55,11 @@ function initMap() {
                 waypoints = [];
             }
 
-            if (storedplaces.length > 1) {
+            if (myStoredPlacesNames.length > 1) {
+               
                 directionsDisplay.setMap(map)
-                var startpoint = storedplaces[0].getPosition();
-                var endpoint = storedplaces[storedplaces.length - 1].getPosition()
+                var startpoint = myStoredPlaces[myStoredPlacesNames[0]].getPosition();
+                var endpoint = myStoredPlaces[myStoredPlacesNames[myStoredPlacesNames.length -1]].getPosition()
                 directionsService.route({
                     origin: startpoint,
                     destination: endpoint,
@@ -106,7 +109,7 @@ function initMap() {
                 position: place.geometry.location
             }));
 
-            var textbox = '<center><p>' + markers[markerindi].title + '</p><button onclick="storeplace( markers[' + markerindi + '])">Add to Places</button></center>'
+            var textbox = '<center><p>' + markers[markerindi].title + '</p><button onclick="myStorePlace( markers[' + markerindi + '])">Add to Places</button></center>'
             makeinfobox(markers[markerindi], textbox);
 
             if (place.geometry.viewport) {
@@ -121,9 +124,9 @@ function initMap() {
         map.fitBounds(bounds);
     });
 
-    if (storedplaces.length > 2) {
-        for (var i = 1; i < storedplaces.length - 1; i++) {
-            waypoints.push(storedplaces[i])
+    if (myStoredPlaces.length > 2) {
+        for (var i = 1; i < myStoredPlaces.length - 1; i++) {
+            waypoints.push(myStoredPlaces[i])
         }
     }
 
@@ -142,8 +145,10 @@ var makeinfobox = function (marker, message) {
  * @param place: geoJSON object with identifing information regarding the saved place
  */
 var myStorePlace = function (place){
+   
   // Create a new id for this object
   var newID = 'id'+tableIndex++;
+  myStoredPlacesNames.push(newID);
   var title = place.title;
   var $newRow = $("<tr>").addClass('place'); //create a new table row of class place
   $($newRow).attr('id',newID); // add the new id to row
@@ -151,12 +156,15 @@ var myStorePlace = function (place){
   var $remove = $('<td>').text(' X ');
   // add new place to object
   myStoredPlaces[newID] = place;
+  getdirections()
   // add event handler for removing row from table and data from place object
   $($remove).on('click', function(){
     console.log('clicked')
     // remove table from row
     $('#'+newID).hide(100);
     delete myStoredPlaces[newID];
+    myStoredPlacesNames.splice(myStoredPlacesNames.indexOf(newID), 1)
+    getdirections()
   });
   // add elements to row
   $newRow.append($name,$remove);
@@ -165,7 +173,7 @@ var myStorePlace = function (place){
 }
 
 var storeplace = function (place) {
-    storedplaces.push(place);
+    myStoredPlaces.push(place);
     tableIndex++;
     var title = place.title;
     myStorePlace(place);
@@ -183,14 +191,14 @@ var storeplace = function (place) {
 
 var removeplace = function (index) {
     $('.place:nth-child(' + (index ) + ')').remove();
-    if (index !== 0 && index !== storedplaces.length - 1) {
+    if (index !== 0 && index !== myStoredPlaces.length - 1) {
         waypoints.splice(index - 1, 1);
     };
-    storedplaces.splice(index - 1, 1);
+    myStoredPlaces.splice(index - 1, 1);
 
-    for (var i = i; i < storedplaces.length; i++) {
-        if (storedplaces[i].title === loc) {
-            storedplaces.splice(i, 1);
+    for (var i = i; i < myStoredPlaces.length; i++) {
+        if (myStoredPlaces[i].title === loc) {
+            myStoredPlaces.splice(i, 1);
         }
     }
     for (var i = index; i < tableIndex; i++) {
