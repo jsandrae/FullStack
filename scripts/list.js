@@ -7,5 +7,6 @@ $('button#signInButton') .on('click',function() {
   username = $('#username').text;
   password = $('#password').text;
   
-  console.log($('#username').val());
+ dismissLogin(username,password);
+
 });
