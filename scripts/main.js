@@ -14,6 +14,10 @@ function init(){
 
 }
 
+function dismissLogin(username, password){
+  
+}
+
 /**
  * Function to run on page Load
  */
