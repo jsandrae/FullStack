@@ -149,6 +149,8 @@ var myStorePlace = function (place){
   $($newRow).attr('id',newID); // add the new id to row
   var $name = $('<td>').text(' '+ title +' ');
   var $remove = $('<td>').text(' X ');
+  // add new place to object
+  myStoredPlaces[newID] = place;
   // add event handler for removing row from table and data from place object
   $($remove).on('click', function(){
     // remove table from row
