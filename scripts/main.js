@@ -15,7 +15,9 @@ function init(){
     $('#trip-box').fadeIn(300);
   });
 }
-
+/**
+ * Function to validate a password for a given username
+ */
 function validateLogin(username, password){
   return false;
 }
