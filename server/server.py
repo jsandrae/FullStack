@@ -41,6 +41,20 @@ class User(Document):
     def __repr__(self):
         return '<User %r>' % (self.username)
 
+class Trips(Document):
+    __collection__ = 'full_stack'
+    __database__ = 'users'
+    structure = {
+        'username': unicode,
+        'password': unicode,
+        'creation_date': datetime.datetime,
+    }
+    validators = {
+        'username': max_length(20),
+        'password': max_length(15)
+    }
+    use_dot_notation = True
+
 # register the User document with our current connection
 connection.register([User])
 
