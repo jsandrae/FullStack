@@ -83,6 +83,12 @@ def get_log():
         }
         return jsonify(error)
 
+@app.route('/login', methods=['POST'])
+def validate_login():
+    received = request.json
+    print received
+    return jsonify({'status':'OK'})
+
 # function to initiate feeding
 # turn on -> delay -> turn off -> create entry in database with username
 @app.route('/feed/<name>', methods=['GET','POST'])
