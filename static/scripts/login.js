@@ -1,24 +1,37 @@
 function loginPopup() {
 	$('a.login-window').on('click',function() {
 
-		// Getting the variable's value from a link
-		var loginBox = $(this).attr('href');
+		// if user is not logged in, popup login
+		if(!isLoggedIn){
+			// Getting the variable's value from a link
+			var loginBox = $(this).attr('href');
 
-		//Fade in the Popup and add close button
-		$(loginBox).fadeIn(300);
+			//Fade in the Popup and add close button
+			$(loginBox).fadeIn(300);
 
-		//Set the center alignment padding + border
-		var popMargTop = ($(loginBox).height() + 24) / 2;
-		var popMargLeft = ($(loginBox).width() + 24) / 2;
+			//Set the center alignment padding + border
+			var popMargTop = ($(loginBox).height() + 24) / 2;
+			var popMargLeft = ($(loginBox).width() + 24) / 2;
 
-		$(loginBox).css({
-			'margin-top' : -popMargTop,
-			'margin-left' : -popMargLeft
-		});
+			$(loginBox).css({
+				'margin-top' : -popMargTop,
+				'margin-left' : -popMargLeft
+			});
 
-		// Add the mask to body
-		$('body').append('<div id="mask"></div>');
-		$('#mask').fadeIn(300);
+			// Add the mask to body
+			$('body').append('<div id="mask"></div>');
+			$('#mask').fadeIn(300);
+
+			// Add event handler for signing in
+			$('#signInButton').on('click',function(){
+
+
+			})
+		} else { // else save trip to user
+
+		}
+
+
 
 		return false;
 	});
@@ -31,3 +44,10 @@ function loginPopup() {
 	return false;
 	});
 };
+
+/**
+ * Function to validate a password for a given username
+ */
+function validateLogin(username, password){
+	return false;
+}
