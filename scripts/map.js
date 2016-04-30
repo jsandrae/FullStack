@@ -1,7 +1,7 @@
 var storedplaces = [];
 var markers = [];
 var markerindi = -1
-var tableindi = -1;
+var tableindi = 0;
 var waypoints = [];
 function initMap() {
     var directionsService = new google.maps.DirectionsService;
@@ -37,6 +37,8 @@ function initMap() {
 
 
         getdirections = function () {
+            
+            waypoints = [];
             if (storedplaces.length > 2) {
 
                 for (var i = 1; i < storedplaces.length - 1; i++) {
@@ -141,7 +143,6 @@ var storeplace = function (place) {
     tableindi++;
     var title = place.title;
     $("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
-
     console.log("Sucess!");
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -155,7 +156,7 @@ var storeplace = function (place) {
 
 removeplace = function (index) {
     debugger
-    $('.place:nth-child(' + (index + 1) + ')').remove();
+    $('.place:nth-child(' + (index) + ')').remove();
     if (index !== 0 && index !== storedplaces.length - 1) {
         waypoints.splice(index, 1);
     }
@@ -163,8 +164,7 @@ removeplace = function (index) {
     storedplaces.splice(index, 1);
 
     for (var i = index; i < tableindi - 1; i++) {
-        $("#t" + (i + 1)).attr('id', 't' + index)
-        $("#t" + (i + 1)).attr('onclick', '"removeplace(' + i + ')"')
+        $('.place:nth-child(' + (i + 1) + ')').attr('onclick', '"removeplace(' + i + ')"')
     }
 
     tableindi--;
