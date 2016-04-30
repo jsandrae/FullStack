@@ -13,7 +13,7 @@ $('button#signInButton') .on('click',function() {
     $('#login-box').fadeOut(300);}
   else {
     var $incorrect = $('<p>');
-    $incorrect.text = 'Sorry, incorrect login.';
+    $incorrect.text('Sorry, incorrect login.');
     $incorrect.insertBefore($('#signInButton'));
   }
   
