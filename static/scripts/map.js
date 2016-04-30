@@ -37,7 +37,7 @@ function initMap() {
 
 
         getdirections = function () {
-            
+
             waypoints = [];
             if (storedplaces.length > 2) {
 
@@ -142,7 +142,7 @@ var storeplace = function (place) {
     storedplaces.push(place);
     tableindi++;
     var title = place.title;
-    $("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
+    $("tbody").append('<tr id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ',' + title +  ')">X</button></td></tr>')
     console.log("Sucess!");
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -154,17 +154,19 @@ var storeplace = function (place) {
     getdirections();
 }
 
-removeplace = function (index) {
+ var removeplace = function (index , loc) {
     debugger
-    $('.place:nth-child(' + (index) + ')').remove();
+    $("#t" + index).remove();
     if (index !== 0 && index !== storedplaces.length - 1) {
         waypoints.splice(index, 1);
     }
     ;
     storedplaces.splice(index, 1);
 
-    for (var i = index; i < tableindi - 1; i++) {
-        $('.place:nth-child(' + (i + 1) + ')').attr('onclick', '"removeplace(' + i + ')"')
+    for (var i = i; i < storedplaces.length; i++) {
+        if(storedplaces[i].title === loc) {
+            storedplaces.splice(i, 1);
+        }
     }
 
     tableindi--;
