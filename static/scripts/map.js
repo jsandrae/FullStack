@@ -142,7 +142,7 @@ var storeplace = function (place) {
     storedplaces.push(place);
     tableindi++;
     var title = place.title;
-    $("tbody").append('<tr id="t' + tableindi + '"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ',' + title +  ')">X</button></td></tr>')
+    $("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableindi + ')">X</button></td></tr>')
     console.log("Sucess!");
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -154,20 +154,29 @@ var storeplace = function (place) {
     getdirections();
 }
 
- var removeplace = function (index , loc) {
-    debugger
-    $("#t" + index).remove();
+var removeplace = function (index) {
+    $('.place:nth-child(' + (index ) + ')').remove();
     if (index !== 0 && index !== storedplaces.length - 1) {
-        waypoints.splice(index, 1);
-    }
-    ;
-    storedplaces.splice(index, 1);
+        waypoints.splice(index - 1, 1);
+    };
+    storedplaces.splice(index - 1, 1);
 
     for (var i = i; i < storedplaces.length; i++) {
-        if(storedplaces[i].title === loc) {
+        if (storedplaces[i].title === loc) {
             storedplaces.splice(i, 1);
         }
     }
+    for (var i = index; i < tableindi; i++) {
+        //$('.place:nth-child(' + (index + 1 ) + ')').find('button').remove();
+        $('.place:nth-child(' + (index + 1 ) + ')').find('button').off('onclick').attr('click', '"removeplace(213132)"');
+        //$('.place:nth-child(' + (index + 1 ) + ')').find('button').remove();
+                //.attr('onclick', 'removeplace(' + 214717414 + ')')
+       
+        $('#your_element').attr('id','the_new_id');
+
+    }
+
+
 
     tableindi--;
     getdirections();
