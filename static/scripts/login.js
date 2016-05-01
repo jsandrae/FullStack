@@ -60,10 +60,25 @@ function validateLogin(username, password){
       console.log(response);
 			isValid = response['isValid']===true;
 			console.log(isValid)
-			return isValid;
+			ajaxResponse(isValid);
     },
     error: function(error) {
       console.log(error);
     }
 	});
+}
+
+/**
+ * Function to be called from ajax response function for asynchronisity sake
+ */
+function ajaxResponse(isValid){
+	if (isValid) {
+		$('#login-box').fadeOut(300);}
+	else {
+		// remove password from text field
+		$('#password').val('');
+		var $incorrect = $('<p>').attr('class','incorrectMessage');
+		$incorrect.text('Sorry, incorrect login.');
+		$incorrect.insertBefore($('#signInButton'));
+	}
 }

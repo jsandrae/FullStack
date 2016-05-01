@@ -10,17 +10,5 @@ function tieSignIn(){
     var password = $('#password').val();
 
     validateLogin(username,password);
-    console.log('tested validation: '+isValid)
-
-    if (isValid) {
-      $('#login-box').fadeOut(300);}
-    else {
-      // remove password from text field
-      $password.text('');
-      var $incorrect = $('<p>').attr('class','incorrectMessage');
-      $incorrect.text('Sorry, incorrect login.');
-      $incorrect.insertBefore($('#signInButton'));
-    }
-
   });
 }
