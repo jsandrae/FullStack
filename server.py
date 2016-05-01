@@ -62,35 +62,6 @@ connection.register([Trip])
 def index():
     return render_template('index.html')
 
-# function to return entire log from database
-@app.route('/log')
-def get_log():
-    cursor = g.db.execute('SELECT * FROM feedingLog ORDER BY id DESC LIMIT 10')
-    results = cursor.fetchall()
-    cursor.close()
-    log = []
-    if results:
-        for entry in results:
-            log_entry = {
-                'id' : entry['id'],
-                'username' : entry['username'],
-                'timestamp' : entry['timestamp']
-                }
-            # append entry to log
-            log.append(log_entry)
-        # create json object to return log
-        json_log = {
-            'status' : 'OK',
-            'log' : log
-        }
-        return jsonify(json_log)
-    else:
-        error = {
-            'status' : 'error',
-            'msg' : 'unable to retrieve log'
-        }
-        return jsonify(error)
-
 # function to save new login information to database
 @app.route('/createAccount', methods=['POST'])
 def create_account():
@@ -121,17 +92,6 @@ def validate_login():
     isValid = (uPass == password)
 
     return jsonify({'status':'OK', 'isValid':isValid})
-
-# function to initiate feeding
-# turn on -> delay -> turn off -> create entry in database with username
-@app.route('/feed/<name>', methods=['GET','POST'])
-def initiate_feeding(name):
-    # perform feeding
-    print name
-    #log feeding in database
-    g.db.execute('INSERT INTO feedingLog (username) VALUES (?)', [name])
-    g.db.commit()
-    return jsonify({'status' : 'OK'})
 
 # run server
 if __name__ == '__main__':

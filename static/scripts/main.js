@@ -26,6 +26,10 @@ function init(){
   });
 }
 
+function saveTrip(){
+  debugger;
+}
+
 function showTrip(){
   isLoggedIn = true;
   $('#mask').fadeOut(fadeTimer);
