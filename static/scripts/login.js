@@ -78,27 +78,58 @@ function createAccount(){
 	$('#createAccount').hide();
 	// add event handler for new button
 	$button.on('click',function(){
+		var username = $('#username').val();
+    var password = $('#password').val();
+		var confirmPass = $('#confirmPass').val();
 		$('.incorrectMessage').fadeOut(5);
-		var passwordMatch = false;
+		var passwordMatch = (password === confirmPass);
 		if(passwordMatch){
-			doRevert = false;
-			createAccountRequest();
+			createAccountRequest(username, password);
 		} else {
-			// remove password from text field
-			$('#password').val('');
-			$('#confirmPass').val('');
-			var $incorrect = $('<p>').attr('class','incorrectMessage');
-			$incorrect.text('Sorry, passwords do not match.');
-			$incorrect.insertBefore($('#createButton'));
+			errorMessage('Sorry, passwords do not match.','#createButton');
 		}
 	});
 }
 
 /**
+ * Function to display login error message
+ */
+function errorMessage(message, button){
+	// remove password from text field
+	$('#password').val('');
+	if(button === '#createButton'){
+		$('#confirmPass').val('');
+	}
+	var $incorrect = $('<p>').attr('class','incorrectMessage');
+	$incorrect.text(message);
+	$incorrect.insertBefore($(button));
+}
+
+/**
  * Function to save account data to server to be stored in database
  */
-function createAccountRequest(){
-
+function createAccountRequest(username, password){
+	var newLogin = {'username': username, 'password':password};
+	var isValid;
+	//var headers = {'Content-Type': 'application/json'}
+	$.ajax({
+    type: 'POST',
+    url: '/createAccount',
+    data: JSON.stringify(newLogin),
+    dataType: 'json',
+    contentType: 'application/json; charset=utf-8',
+		success: function(response) {
+			if(response['status'] === 'OK'){
+				console.log(response)
+	      showTrip();
+			} else {
+				errorMessage('Sorry, a user by that username already exists','#createButton');
+			}
+    },
+    error: function(error) {
+      console.log(error);
+    }
+	});
 }
 
 /**
@@ -106,7 +137,6 @@ function createAccountRequest(){
  */
 function validateLogin(username, password){
 	var newLogin = {'username': username, 'password':password};
-	var isValid;
 	//var headers = {'Content-Type': 'application/json'}
 	$.ajax({
     type: 'POST',
@@ -116,9 +146,14 @@ function validateLogin(username, password){
     contentType: 'application/json; charset=utf-8',
 		success: function(response) {
       console.log(response);
-			isValid = response['isValid']===true;
-			console.log(isValid)
-			ajaxResponse(isValid);
+			var status = response['status'];
+			if (status !== 'OK'){
+				errorMessage(status,'#signInButton');
+			} else {
+				var isValid = response['isValid']===true;
+				console.log(isValid)
+				ajaxResponse(isValid);
+			}
     },
     error: function(error) {
       console.log(error);
@@ -131,12 +166,13 @@ function validateLogin(username, password){
  */
 function ajaxResponse(isValid){
 	if (isValid) {
-		$('#login-box').fadeOut(300);}
-	else {
+		showTrip();
+	} else {
+		errorMessage('Sorry, incorrect login.','#signInButton');
 		// remove password from text field
 		$('#password').val('');
 		var $incorrect = $('<p>').attr('class','incorrectMessage');
-		$incorrect.text('Sorry, incorrect login.');
-		$incorrect.insertBefore($('#signInButton'));
+		$incorrect.text();
+		$incorrect.insertBefore();
 	}
 }

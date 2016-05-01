@@ -91,12 +91,32 @@ def get_log():
         }
         return jsonify(error)
 
+# function to save new login information to database
+@app.route('/createAccount', methods=['POST'])
+def create_account():
+    received = request.json
+    username = received['username']
+    password = received['password']
+    newUser = connection.User()
+    query = connection.User.find_one({'username':username})
+    print query
+    if (query == None):
+        newUser['username'] = username
+        newUser['password'] = password
+        newUser.save()
+        return jsonify({'status':'OK'})
+    else:
+        return jsonify({'status':'Error: duplicate username'})
+
+# function to check database for valid login information
 @app.route('/login', methods=['POST'])
 def validate_login():
     received = request.json
     username = received['username']
     password = received['password']
     query = connection.User.find_one({'username':username})
+    if (query == None):
+        return jsonify({'status':'Error: No such username exists', 'isValid': 'false'})
     uPass = query['password']
     isValid = (uPass == password)
 

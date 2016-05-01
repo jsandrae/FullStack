@@ -25,6 +25,12 @@ function init(){
   })
 }
 
+function showTrip(){
+  isLoggedIn = true;
+  $('#login-box').fadeOut(300);
+  $('#trip-box').fadeIn(300);
+}
+
 /**
  * Function to run on page Load
  */
