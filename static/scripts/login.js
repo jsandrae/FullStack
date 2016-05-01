@@ -44,6 +44,19 @@ function loginPopup() {
 };
 
 /**
+ * Function to create a new user account
+ */
+function createAccount(){
+	var $confirmLabel = $('<label>').addClass('confirmPass');
+	var $confirmSpan = $('<span>').text('Confirm Password');
+	var $confirmInput = $('<input>').attr('id','confirmPass');
+	$confirmInput.attr('value','');
+	$confirmInput.attr('placeholder','Confirm Password');
+	$confirmLabel.append($confirmSpan,$confirmInput);
+	$confirmLabel.insertAfter($('label.password'));
+}
+
+/**
  * Function to validate a password for a given username
  */
 function validateLogin(username, password){

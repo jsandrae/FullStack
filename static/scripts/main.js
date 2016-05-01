@@ -16,6 +16,10 @@ function init(){
   $("a.trip-window").on('click',function(){
     $('#trip-box').fadeIn(300);
   });
+  // add event handler to create a new account
+  $('#createAccount').on('click',function(){
+    createAccount();
+  })
 }
 
 /**
