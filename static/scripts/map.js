@@ -208,6 +208,10 @@ var retrivePlaces = function (place) {
     }
 }
 var storePlace = function (place) {
+    var Tripname = {
+        start: myStoredPlaces[myStoredPlacesNames[0]],
+        destination: myStoredPlaces[myStoredPlacesNames[myStoredPlacesNames.length-1]]
+    }
     for(var i = 0; i < myStoredPlacesNames.length; i++) {
         myStoredPlaces[myStoredPlacesNames[i]]
     }
