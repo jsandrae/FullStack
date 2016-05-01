@@ -209,8 +209,8 @@ var retrivePlaces = function (place) {
 }
 var storePlace = function (place) {
     var Tripname = {
-        start: myStoredPlaces[myStoredPlacesNames[0]],
-        destination: myStoredPlaces[myStoredPlacesNames[myStoredPlacesNames.length-1]]
+        start: myStoredPlaces[myStoredPlacesNames[0]].title,
+        destination: myStoredPlaces[myStoredPlacesNames[myStoredPlacesNames.length-1]].title
     }
     for(var i = 0; i < myStoredPlacesNames.length; i++) {
         myStoredPlaces[myStoredPlacesNames[i]]
