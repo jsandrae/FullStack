@@ -174,48 +174,4 @@ var myStorePlace = function (place){
   //other stuff
 }
 
-var storeplace = function (place) {
-    myStoredPlaces.push(place);
-    tableIndex++;
-    var title = place.title;
-    myStorePlace(place);
-    //$("tbody").append('<tr class="place"><td>' + title + '</td><td><button onclick="removeplace(' + tableIndex + ')">X</button></td></tr>')
-    console.log("Sucess!");
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-    }
-    console.log(place.getPosition());
-    console.log(place)
 
-
-    getdirections();
-}
-
-var removeplace = function (index) {
-    $('.place:nth-child(' + (index ) + ')').remove();
-    if (index !== 0 && index !== myStoredPlaces.length - 1) {
-        waypoints.splice(index - 1, 1);
-    };
-    myStoredPlaces.splice(index - 1, 1);
-
-    for (var i = i; i < myStoredPlaces.length; i++) {
-        if (myStoredPlaces[i].title === loc) {
-            myStoredPlaces.splice(i, 1);
-        }
-    }
-    for (var i = index; i < tableIndex; i++) {
-        //$('.place:nth-child(' + (index + 1 ) + ')').find('button').remove();
-        $('.place:nth-child(' + (index + 1 ) + ')').find('button').off('onclick').attr('click', '"removeplace(213132)"');
-        //$('.place:nth-child(' + (index + 1 ) + ')').find('button').remove();
-                //.attr('onclick', 'removeplace(' + 214717414 + ')')
-
-        $('#your_element').attr('id','the_new_id');
-
-    }
-
-
-
-    tableIndex--;
-    getdirections();
-
-}
