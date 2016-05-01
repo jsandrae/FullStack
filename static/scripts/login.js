@@ -65,6 +65,7 @@ function createAccount(){
 	var $confirmSpan = $('<span>').text('Confirm Password');
 	var $confirmInput = $('<input>').attr('id','confirmPass');
 	$confirmInput.attr('value','');
+	$confirmInput.attr('type','password');
 	$confirmInput.attr('placeholder','Confirm Password');
 	$confirmLabel.append($confirmSpan,$confirmInput);
 	$confirmLabel.insertAfter($('label.password'));
@@ -77,8 +78,27 @@ function createAccount(){
 	$('#createAccount').hide();
 	// add event handler for new button
 	$button.on('click',function(){
-		doRevert = false;
+		$('.incorrectMessage').fadeOut(5);
+		var passwordMatch = false;
+		if(passwordMatch){
+			doRevert = false;
+			createAccountRequest();
+		} else {
+			// remove password from text field
+			$('#password').val('');
+			$('#confirmPass').val('');
+			var $incorrect = $('<p>').attr('class','incorrectMessage');
+			$incorrect.text('Sorry, passwords do not match.');
+			$incorrect.insertBefore($('#createButton'));
+		}
 	});
+}
+
+/**
+ * Function to save account data to server to be stored in database
+ */
+function createAccountRequest(){
+
 }
 
 /**
