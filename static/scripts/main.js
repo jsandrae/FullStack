@@ -58,7 +58,7 @@ debugger;
     contentType: 'application/json; charset=utf-8',
 		success: function(response) {
 			console.log(response)
-      showTrip(placeArray, username);
+      showTrip({"startLoc":startLoc, "finalLoc":finalLoc}, username);
     },
     error: function(error) {
       console.log(error);
