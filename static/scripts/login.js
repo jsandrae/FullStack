@@ -22,11 +22,6 @@ function loginPopup() {
 			$('body').append('<div id="mask"></div>');
 			$('#mask').fadeIn(300);
 
-			// Add event handler for signing in
-			$('#signInButton').on('click',function(){
-
-
-			})
 		} else { // else save trip to user
 
 		}
@@ -38,15 +33,34 @@ function loginPopup() {
 	$('a.close, #mask').on('click', function() {
 	  $('#mask , .login-popup').fadeOut(300 , function() {
 		$('#mask').remove();
+		if(doRevert){
+			revertLogin();
+		}
 	});
 	return false;
 	});
 };
 
 /**
+ * Function to revert login popup to login from create account
+ */
+function revertLogin(){
+	$('label.confirmPass').remove();
+	var $button = $('button#createButton');
+	$button.attr('id','signInButton');
+	// change button text
+	$button.text('Sign in')
+	// hide account creation link
+	$('#createAccount').show();
+	doRevert = false;
+}
+
+/**
  * Function to create a new user account
  */
 function createAccount(){
+	doRevert = true;
+	// Add new information and text field for password confirmation
 	var $confirmLabel = $('<label>').addClass('confirmPass');
 	var $confirmSpan = $('<span>').text('Confirm Password');
 	var $confirmInput = $('<input>').attr('id','confirmPass');
@@ -54,6 +68,17 @@ function createAccount(){
 	$confirmInput.attr('placeholder','Confirm Password');
 	$confirmLabel.append($confirmSpan,$confirmInput);
 	$confirmLabel.insertAfter($('label.password'));
+	// change submit button functionallity
+	var $button = $('button#signInButton');
+	$button.attr('id','createButton');
+	// change button text
+	$button.text('Confirm Account')
+	// hide account creation link
+	$('#createAccount').hide();
+	// add event handler for new button
+	$button.on('click',function(){
+		doRevert = false;
+	});
 }
 
 /**

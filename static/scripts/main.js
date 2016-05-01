@@ -3,6 +3,7 @@
 var username;
 var password;
 var isLoggedIn;
+var doRevert;
 
 var debug=true;
 
@@ -12,6 +13,7 @@ var debug=true;
 function init(){
   // at start of page, user is not logged in
   isLoggedIn = false;
+  doRevert = false;
   // add event handler to debug trip button
   $("a.trip-window").on('click',function(){
     $('#trip-box').fadeIn(300);
