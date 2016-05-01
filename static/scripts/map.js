@@ -202,4 +202,12 @@ var myStorePlace = function (place) {
     //other stuff
 }
 
+var retrivePlaces = function (place) {
+    for(var i = 0; i < place.length; i++) {
+        myStorePlace(place);
+    }
+}
+var storePlace = function (place) {
+    //Stub for storeplace
+}
 
