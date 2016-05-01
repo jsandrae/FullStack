@@ -4,6 +4,7 @@ var username;
 var password;
 var isLoggedIn;
 var doRevert;
+var fadeTimer = 200;
 
 var debug=true;
 
@@ -16,22 +17,26 @@ function init(){
   doRevert = false;
   // add event handler to debug trip button
   $("a.trip-window").on('click',function(){
-    $('#trip-box').fadeIn(300);
+    $('#trip-box').fadeIn(fadeTimer);
   });
   // add event handler to create a new account
   $('#createAccount').on('click',function(){
     $('.incorrectMessage').fadeOut(5);
     createAccount();
-  })
+  });
 }
 
 function showTrip(){
   isLoggedIn = true;
-  $('#mask').fadeOut(300);
-  $('#login-box').fadeOut(300);
-  $('#trip-box').fadeIn(300);
+  $('#mask').fadeOut(fadeTimer);
+  $('#login-box').fadeOut(fadeTimer);
+  $('#trip-box').fadeIn(fadeTimer);
+  $('a.modalTrips').on('click', function() {
+    $('.modalDialog').fadeOut(fadeTimer);
+    $('#mask').fadeOut(fadeTimer);
+  });
   $('body').append('<div id="mask"></div>');
-  $('#mask').fadeIn(300);
+  $('#mask').fadeIn(fadeTimer);
 }
 
 /**

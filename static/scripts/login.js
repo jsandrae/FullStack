@@ -7,7 +7,7 @@ function loginPopup() {
 			var loginBox = $(this).attr('href');
 
 			//Fade in the Popup and add close button
-			$(loginBox).fadeIn(300);
+			$(loginBox).fadeIn(fadeTimer);
 
 			//Set the center alignment padding + border
 			var popMargTop = ($(loginBox).height() + 24) / 2;
@@ -20,7 +20,7 @@ function loginPopup() {
 
 			// Add the mask to body
 			$('body').append('<div id="mask"></div>');
-			$('#mask').fadeIn(300);
+			$('#mask').fadeIn(fadeTimer);
 
 		} else { // else save trip to user
 
@@ -28,16 +28,15 @@ function loginPopup() {
 
 		return false;
 	});
-
 	// When clicking on the button close or the mask layer the popup closed
 	$('a.close, #mask').on('click', function() {
-	  $('#mask , .login-popup').fadeOut(300 , function() {
-		$('#mask').remove();
-		if(doRevert){
-			revertLogin();
-		}
-	});
-	return false;
+		console.log('close clicked')
+	  $('#mask , .login-popup').fadeOut(fadeTimer , function() {
+			$('#mask').remove();
+			if(doRevert){
+				revertLogin();
+			}
+		});
 	});
 };
 

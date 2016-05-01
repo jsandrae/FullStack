@@ -4,6 +4,7 @@ h2 {color: white;
 }
 
 .modalDialog {
+  display: none;
 	position: fixed;
 	font-family: Arial, Helvetica, sans-serif;
 	top: 0;
@@ -11,18 +12,6 @@ h2 {color: white;
 	bottom: 0;
 	left: 0;
 	z-index: 99999;
-	opacity:0;
-	-webkit-transition: opacity 400ms ease-in;
-	-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;
-	pointer-events: none;
-}
-
-
-
-.modalDialog:target {
-	opacity:1;
-	pointer-events: auto;
 }
 
 .modalDialog > div {
