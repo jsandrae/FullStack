@@ -49,6 +49,8 @@ class Trip(Document):
     __database__ = 'trips'
     structure = {
         'username': unicode,
+        'startLoc': unicode,
+        'finalLoc': unicode,
         'trip': dict,
     }
     use_dot_notation = True
@@ -92,6 +94,30 @@ def validate_login():
     isValid = (uPass == password)
 
     return jsonify({'status':'OK', 'isValid':isValid})
+
+#function to load trips from database
+@app.route('/loadTrips', methods=['POST'])
+def load_trips():
+    received = request.json
+    username = received['username']
+    query = connection.Trip.find({'username':username})
+    print query
+
+# function to save a trip in the database
+@app.route('/saveTrip', methods=['POST'])
+def save_trip():
+    received = request.json
+    username = received['username']
+    startLoc = received['startLoc']
+    finalLoc = received['finalLoc']
+    trip = received['trip']
+    newTrip = connection.Trip()
+    newTrip['username'] = username
+    newTrip['startLoc'] = startLoc
+    newTrip['finalLoc'] = finalLoc
+    newTrip['trip'] = trip
+    newTrip.save()
+    return jsonify({'status':'OK'})
 
 # run server
 if __name__ == '__main__':

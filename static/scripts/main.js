@@ -1,7 +1,7 @@
 "use strict";
 //Temporary global varriables for debug purposes
-var username;
-var password;
+//var username;
+//var password;
 var isLoggedIn;
 var doRevert;
 var fadeTimer = 200;
@@ -26,12 +26,47 @@ function init(){
   });
 }
 
-function saveTrip(){
-  debugger;
+function saveTrip(username){
+  var placeArray = [],
+      placeID,
+      firstID = null,
+      startLoc,
+      finalLoc;
+      console.log(myStoredPlaces)
+debugger;
+  // Take places out of an object and place in an array
+  for (placeID in myStoredPlaces){
+    if (firstID === null){
+      firstID = placeID;
+      startLoc = myStoredPlaces[firstID].getTitle();
+    }
+    var place = myStoredPlaces[placeID];
+    finalLoc = place.getTitle();
+    placeArray.push({placeID:place});
+  }
+  var newObject = {
+    'username':username,
+    'startLoc':startLoc,
+    'finalLoc':finalLoc,
+    'trip':placeArray
+  }
+  $.ajax({
+    type: 'POST',
+    url: '/saveTrip',
+    data: JSON.stringify(newObject),
+    dataType: 'json',
+    contentType: 'application/json; charset=utf-8',
+		success: function(response) {
+			console.log(response)
+      showTrip(placeArray, username);
+    },
+    error: function(error) {
+      console.log(error);
+    }
+	});
 }
 
-function showTrip(){
-  isLoggedIn = true;
+function showTrip(placeArray, username){
   $('#mask').fadeOut(fadeTimer);
   $('#login-box').fadeOut(fadeTimer);
   $('#trip-box').fadeIn(fadeTimer);
