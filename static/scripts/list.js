@@ -9,12 +9,8 @@ function tieSignIn(){
     var username = $('#username').val();
     var password = $('#password').val();
 
-    console.log('$username:')
-    console.log($username)
-    console.log('username:')
-    console.log(username)
-
-    var isValid = validateLogin(username,password);
+    validateLogin(username,password);
+    console.log('tested validation: '+isValid)
 
     if (isValid) {
       $('#login-box').fadeOut(300);}

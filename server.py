@@ -53,8 +53,9 @@ class Trip(Document):
     }
     use_dot_notation = True
 
-# register the User document with our current connection
+# register the User & trip document with our current connection
 connection.register([User])
+connection.register([Trip])
 
 # function to display index page
 @app.route('/')
@@ -93,8 +94,13 @@ def get_log():
 @app.route('/login', methods=['POST'])
 def validate_login():
     received = request.json
-    print received
-    return jsonify({'status':'OK'})
+    username = received['username']
+    password = received['password']
+    query = connection.User.find_one({'username':username})
+    uPass = query['password']
+    isValid = (uPass == password)
+
+    return jsonify({'status':'OK', 'isValid':isValid})
 
 # function to initiate feeding
 # turn on -> delay -> turn off -> create entry in database with username

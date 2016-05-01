@@ -30,7 +30,7 @@ function loginPopup() {
 		} else { // else save trip to user
 
 		}
-		
+
 		return false;
 	});
 
@@ -47,5 +47,23 @@ function loginPopup() {
  * Function to validate a password for a given username
  */
 function validateLogin(username, password){
-	return false;
+	var newLogin = {'username': username, 'password':password};
+	var isValid;
+	//var headers = {'Content-Type': 'application/json'}
+	$.ajax({
+    type: 'POST',
+    url: '/login',
+    data: JSON.stringify(newLogin),
+    dataType: 'json',
+    contentType: 'application/json; charset=utf-8',
+		success: function(response) {
+      console.log(response);
+			isValid = response['isValid']===true;
+			console.log(isValid)
+			return isValid;
+    },
+    error: function(error) {
+      console.log(error);
+    }
+	});
 }
