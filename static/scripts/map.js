@@ -134,7 +134,9 @@ function initMap() {
 
 var makeinfobox = function (marker, message) {
     var infowindow = new google.maps.InfoWindow({
-        content: message
+        content: message,
+        alignBottom: true,
+        pixelOffset: new google.maps.Size(-25, 0)
     });
     marker.addListener('click', function () {
         infowindow.open(marker.get('map'), marker);
