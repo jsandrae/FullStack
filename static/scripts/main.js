@@ -27,8 +27,11 @@ function init(){
 
 function showTrip(){
   isLoggedIn = true;
+  $('#mask').fadeOut(300);
   $('#login-box').fadeOut(300);
   $('#trip-box').fadeIn(300);
+  $('body').append('<div id="mask"></div>');
+  $('#mask').fadeIn(300);
 }
 
 /**

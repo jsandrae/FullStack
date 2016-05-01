@@ -9,73 +9,32 @@
     <title> Plan your Roadtrip </title>
   </head>
   <body>
-
-<video autoplay loop id="bgvid">
-    <source src= '../static/assests/map2.mp4' type="video/mp4">
-</video>
-
+    <video autoplay loop id="bgvid">
+        <source src= '../static/assests/map2.mp4' type="video/mp4">
+    </video>
     <div class="container">
       <!-- div element that will hold all main page elements -->
       <div id="mainPage">
 
         <div class ="logo">
-        <img src = "../static/assests/roadtrip2.png" height="150" width="450">
+          <img src = "../static/assests/roadtrip2.png" height="150" width="450">
         </div>
 
         <!-- Search bar -->
         <div id="tfheader">
-
-            <input type="text" id="searchbox" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
-
+          <input type="text" id="searchbox" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
         	<div class="tfclear"></div>
       	</div>
-    <div id="importantStuff">
+        <div id="importantStuff">
 
-      <!-- Map -->
-      <div id="map"></div>
-      <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I&libraries=visualization&libraries=places&callback=initMap">
-      </script>
+          <!-- Map -->
+          <div id="map"></div>
+          <script async defer
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZXV4jf6adOPu6nFzXbQhLt_6tj810C9I&libraries=visualization&libraries=places&callback=initMap">
+          </script>
 
-      <!-- Table -->
-      <table class = 'one' cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-      	<!-- Table Header -->
-      	<thead>
-      		<tr>
-      			<th>Places</th>
-      			<th>Delete</th>
-      		</tr>
-      	</thead>
-      	<!-- Table Header -->
-      	<!-- Table Body -->
-      	<tbody>
-
-      	</tbody>
-      </table>
-
-          <!-- Review and Print Button -->
-  		<div class="post">
-      	<div class="btn-sign">
-  				<a href="#login-box" class="login-window"> Review and Print </a>
-      	</div>
-        <div class="btn-sign">
-          <a href="#trip-box" class="trip-window"> Trip Debug </a>
-        </div>
-  		</div>
-
-    </div>
-
-      <!--review box -->
-
-      <a href="#openModal">Open </a>
-
-      <div id="trip-box" class="modalDialog hidden">
-        <div>
-          <a href="#close" title="Close" class="modalTrips">X</a>
-
-        	<h2>Your Trip Overview:</h2>
-
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+          <!-- Table -->
+          <table class = 'one' cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
           	<!-- Table Header -->
           	<thead>
           		<tr>
@@ -89,35 +48,67 @@
 
           	</tbody>
           </table>
+
+          <!-- Review and Print Button -->
+      		<div class="post">
+          	<div class="btn-sign">
+      				<a href="#login-box" class="login-window"> Review and Print </a>
+          	</div>
+            <div class="btn-sign">
+              <a href="#trip-box" class="trip-window"> Trip Debug </a>
+            </div>
+      		</div>
+
         </div>
-      </div>
+        <!--review box -->
+        <div id="trip-box" class="modalDialog hidden">
+          <div>
+            <a href="#close" title="Close" class="modalTrips">X</a>
 
+            <h2>Your Trip Overview:</h2>
 
-      <!-- div element that will hold login html elements -->
-      <div id="login-box" class="login-popup">
-        <div id='loginMain'>
-          <a href="#" class="close"><img src="../static/assests/close.png" height=" 30px" width="30px"
-            class="btn_close" title="Close Window" alt="Close" /></a>
-          <form method="post" class="signin" action="#">
-            <fieldset class="textbox">
-              <label class="username">
-                <span>Username</span>
-                <input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
-              </label>
+            <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+              <!-- Table Header -->
+              <thead>
+                <tr>
+                  <th>Places</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <!-- Table Header -->
+              <!-- Table Body -->
+              <tbody>
 
-              <label class="password">
-                <span>Password</span>
-                <input id="password" name="password" value="" type="password" placeholder="Password">
-              </label>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- div element that will hold login html elements -->
+        <div id="login-box" class="login-popup">
+          <div id='loginMain'>
+            <a href="#" class="close"><img src="../static/assests/close.png" height=" 30px" width="30px"
+              class="btn_close" title="Close Window" alt="Close" /></a>
+            <form method="post" class="signin" action="#">
+              <fieldset class="textbox">
+                <label class="username">
+                  <span>Username</span>
+                  <input id="username" name="username" value="" type="text" autocomplete="on" placeholder="Username">
+                </label>
 
-              <button class="submit button" type="button" id="signInButton">Sign in</button>
+                <label class="password">
+                  <span>Password</span>
+                  <input id="password" name="password" value="" type="password" placeholder="Password">
+                </label>
 
-              <p>
-                <a class="register" id='createAccount' href="#">Need an account? Create one.</a>
-              </p>
+                <button class="submit button" type="button" id="signInButton">Sign in</button>
 
-            </fieldset>
-          </form>
+                <p>
+                  <a class="register" id='createAccount' href="#">Need an account? Create one.</a>
+                </p>
+
+              </fieldset>
+            </form>
+          </div>
         </div>
       </div>
     </div>
