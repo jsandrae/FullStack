@@ -208,6 +208,8 @@ var retrivePlaces = function (place) {
     }
 }
 var storePlace = function (place) {
-    //Stub for storeplace
+    for(var i = 0; i < myStoredPlacesNames.length; i++) {
+        myStoredPlaces[myStoredPlacesNames[i]]
+    }
 }
 
