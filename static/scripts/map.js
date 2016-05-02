@@ -179,9 +179,9 @@ var makeinfobox = function (marker, message) {
         alignBottom: true,
         pixelOffset: new google.maps.Size(-25, 0)
     });
-    marker.addListener('click', function () {
+    //marker.addListener('click', function () {
         infowindow.open(marker.get('map'), marker);
-    });
+    //});
 }
 /**
  * Function to take a given geoJSON object and add it to the overall place object
