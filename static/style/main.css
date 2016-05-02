@@ -38,7 +38,7 @@ body {
 }
 
 a {
-  font-size: 10px;
+  font-size: 0.9em;
   margin-left: 7px;
   margin-right: 50px;
   text-decoration: none;
@@ -105,12 +105,15 @@ a.close{
 p.mapPopup.mapPopupTitle{
   text-decoration: underline;
   font-size: 1.1em;
-  cursor: auto;
 }
 
-p.mapPopup{
+p.mapPopup.mapPopupText{
   font-size: 0.9em;
   cursor: pointer;
+}
+
+p.mapPopup.mapPopupText:hover{
+  background-color: #F7F7F7;
 }
 
 img.btn_close {

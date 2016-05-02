@@ -143,7 +143,7 @@ function initMap() {
             var $titleName = $('<p>').text(markers[markerindi].title);
             $($titleName).addClass('mapPopup mapPopupTitle');
             var $titleCommand = $('<p>').text('Add to places');
-            $($titleCommand).addClass('mapPopup');
+            $($titleCommand).addClass('mapPopup mapPopupText');
 
             $(textBox).append($titleName,$titleCommand);
             // Add event handler for $textBox

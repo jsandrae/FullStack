@@ -26,33 +26,32 @@ function init(){
   });
 }
 
-function saveTrip(username){
-  var placeArray = [],
+function saveTrip(username){debugger;
+  var placeObject = {},
       placeID,
-      firstID = null,
-      startLoc,
+      startLoc = null,
       finalLoc;
       console.log(myStoredPlaces)
   // Take places out of an object and place in an array
   for (placeID in myStoredPlaces){
-    if (firstID === null){
-      firstID = placeID;
-      startLoc = myStoredPlaces[firstID].getTitle();
-    }
     var place = myStoredPlaces[placeID];
-    finalLoc = place.getTitle();
-    placeArray.push({placeID:place});
+    var placeName = place.getTitle();
+    if (startLoc === null){
+      startLoc = placeName;
+    }
+    finalLoc = placeName;
+    placeObject[placeName] = place;
   }
-  var newObject = {
+  var newTrip = {
     'username':username,
     'startLoc':startLoc,
     'finalLoc':finalLoc,
-    'trip':placeArray
+    'trip':myStoredPlaces
   }
   $.ajax({
     type: 'POST',
     url: '/saveTrip',
-    data: JSON.stringify(newObject),
+    data: JSON.stringify(newTrip),
     dataType: 'json',
     contentType: 'application/json; charset=utf-8',
 		success: function(response) {
