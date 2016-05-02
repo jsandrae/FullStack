@@ -15,6 +15,7 @@ function init(){
   // at start of page, user is not logged in
   isLoggedIn = false;
   doRevert = false;
+  $('div.btn-sign.logout').on('click',function(){console.log('clicked')})
   // add event handler to debug trip button
   $("a.trip-window").on('click',function(){
     $('#trip-box').fadeIn(fadeTimer);
@@ -50,17 +51,13 @@ function saveTrip(username){debugger;
   $.ajax({
     type: 'POST',
     url: '/saveTrip',
-    data: CircularJSON.stringify(newTrip)
-    /*( newTrip, function( key, value) {
-      if( key == 'parent') { return value.id;}
-      else {return value;}
-    })*/,
+    data: CircularJSON.stringify(newTrip),
     dataType: 'json',
     contentType: 'application/json; charset=utf-8',
 		success: function(response) {
       console.log("Saved trip response:")
 			console.log(response)
-      //showTrip({"startLoc":startLoc, "finalLoc":finalLoc}, username);
+      showTrip({"startLoc":startLoc, "finalLoc":finalLoc}, username, 'table.one tbody');
     },
     error: function(error) {
       console.log("Saved Trip error")
@@ -73,14 +70,17 @@ function showTrip(placeArray, username){
   // Remove login popup and mask
   $('#mask').fadeOut(fadeTimer);
   $('#login-box').fadeOut(fadeTimer);
-  // Add trip box, event handler for trip box and re-add mask
+  // Add trip box for trip box and re-add mask
   $('#trip-box').fadeIn(fadeTimer);
+  $('body').append('<div id="mask"></div>');
+  $('#mask').fadeIn(fadeTimer);
+  // Add event handler for show trip modal window
   $('a.modalTrips').on('click', function() {
     $('.modalDialog').fadeOut(fadeTimer);
     $('#mask').fadeOut(fadeTimer);
   });
-  $('body').append('<div id="mask"></div>');
-  $('#mask').fadeIn(fadeTimer);
+  // Query server to find all trips for this username
+
 }
 
 /**

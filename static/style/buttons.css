@@ -41,3 +41,17 @@
 	margin: 0;
 	padding: 12px 17px;
 }
+
+.btn-sign.logout a {
+	padding-left: 20px;
+}
+
+.btn-sign.save{
+	float: left;
+	margin-left: 7%;
+}
+
+.btn-sign.logout {
+	float: right;
+	margin-right: 7%;
+}

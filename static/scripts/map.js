@@ -148,7 +148,7 @@ function initMap() {
             $(textBox).append($titleName,$titleCommand);
             // Add event handler for $textBox
             $(textBox).on('click',function(){
-              myStorePlace( markers[markerindi]);
+              myStorePlace(markers[markerindi],'table.one tbody');
             });
 
             makeinfobox(markers[markerindi], textBox);
@@ -187,7 +187,7 @@ var makeinfobox = function (marker, message) {
  * Function to take a given geoJSON object and add it to the overall place object
  * @param place: geoJSON object with identifing information regarding the saved place
  */
-var myStorePlace = function (place) {
+var myStorePlace = function (place, table) {
     // Clear search text field
     $('#searchbox').val('');
 
@@ -213,13 +213,13 @@ var myStorePlace = function (place) {
     });
     // add elements to row
     $newRow.append($name, $remove);
-    $('table.one tbody').append($newRow);
+    $(table).append($newRow);
     //other stuff
 }
 
-var retrivePlaces = function (place) {
+var retrivePlaces = function (places) {
     for(var i = 0; i < place.length; i++) {
-        myStorePlace(place);
+        myStorePlace(places[i], 'table.tripList tbody');
     }
 }
 var storePlace = function (place) {
