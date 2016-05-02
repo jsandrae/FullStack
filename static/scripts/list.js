@@ -8,6 +8,5 @@ function tieSignIn(){
     var password = $('#password').val();
 
     validateLogin(username,password);
-    saveTrip(username);
   });
 }

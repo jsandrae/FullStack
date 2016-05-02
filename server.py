@@ -117,7 +117,7 @@ def save_trip():
     newTrip['startLoc'] = startLoc
     newTrip['finalLoc'] = finalLoc
     newTrip['trip'] = trip
-    newTrip.save()
+    newTrip.save(check_keys=False)
     return jsonify({'status':'OK'})
 
 # run server

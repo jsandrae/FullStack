@@ -213,7 +213,7 @@ var myStorePlace = function (place) {
     });
     // add elements to row
     $newRow.append($name, $remove);
-    $('tbody').append($newRow);
+    $('table.one tbody').append($newRow);
     //other stuff
 }
 

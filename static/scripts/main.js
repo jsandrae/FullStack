@@ -31,7 +31,6 @@ function saveTrip(username){debugger;
       placeID,
       startLoc = null,
       finalLoc;
-      console.log(myStoredPlaces)
   // Take places out of an object and place in an array
   for (placeID in myStoredPlaces){
     var place = myStoredPlaces[placeID];
@@ -51,22 +50,30 @@ function saveTrip(username){debugger;
   $.ajax({
     type: 'POST',
     url: '/saveTrip',
-    data: JSON.stringify(newTrip),
+    data: CircularJSON.stringify(newTrip)
+    /*( newTrip, function( key, value) {
+      if( key == 'parent') { return value.id;}
+      else {return value;}
+    })*/,
     dataType: 'json',
     contentType: 'application/json; charset=utf-8',
 		success: function(response) {
+      console.log("Saved trip response:")
 			console.log(response)
-      showTrip({"startLoc":startLoc, "finalLoc":finalLoc}, username);
+      //showTrip({"startLoc":startLoc, "finalLoc":finalLoc}, username);
     },
     error: function(error) {
+      console.log("Saved Trip error")
       console.log(error);
     }
 	});
 }
 
 function showTrip(placeArray, username){
+  // Remove login popup and mask
   $('#mask').fadeOut(fadeTimer);
   $('#login-box').fadeOut(fadeTimer);
+  // Add trip box, event handler for trip box and re-add mask
   $('#trip-box').fadeIn(fadeTimer);
   $('a.modalTrips').on('click', function() {
     $('.modalDialog').fadeOut(fadeTimer);

@@ -141,13 +141,13 @@ function validateLogin(username, password){
     dataType: 'json',
     contentType: 'application/json; charset=utf-8',
 		success: function(response) {
+			console.log("Validating Login:")
       console.log(response);
 			var status = response['status'];
 			if (status !== 'OK'){
 				errorMessage(status,'#signInButton');
 			} else {
 				var isValid = response['isValid']===true;
-				console.log(isValid)
 				ajaxResponse(isValid, username);
 			}
     },
