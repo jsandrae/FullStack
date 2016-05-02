@@ -102,6 +102,17 @@ a.close{
 	margin-right: 15px;
 }
 
+p.mapPopup.mapPopupTitle{
+  text-decoration: underline;
+  font-size: 1.1em;
+  cursor: auto;
+}
+
+p.mapPopup{
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
 img.btn_close {
 	margin: 50 15 0 0 ;
 }

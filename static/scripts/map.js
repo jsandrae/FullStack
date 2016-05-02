@@ -46,7 +46,7 @@ function initMap() {
         }
 
 //This function uses the google routing api along with a few loops and if statements
-//to properly render locations each time it is called 
+//to properly render locations each time it is called
         getdirections = function () {
             /*Waypoints are what is required for rendering more then 2 locations, Upon each
              * run it will empty out waypoints.
@@ -65,14 +65,14 @@ function initMap() {
                     })
 
                 }
-            } 
+            }
 //Insures it will only generate directions if there is at least 2 locations
             if (myStoredPlacesNames.length > 1) {
                 /*
                  * The following is required for google directions api with a few
                  * tweaks. it will first make the directions visable on the map
                  * then it declares the starting and ending points using both
-                 * mystoredplaces and mystoredplacesnames. 
+                 * mystoredplaces and mystoredplacesnames.
                  */
                 directionsDisplay.setMap(map)
                 var startpoint = myStoredPlaces[myStoredPlacesNames[0]].getPosition();
@@ -112,7 +112,6 @@ function initMap() {
 //This resets the marker indicator
         var markerindi = -1;
 
-
 //Changes the google map view upon search
         var bounds = new google.maps.LatLngBounds();
         //Prepares icon location for each place found
@@ -135,10 +134,24 @@ function initMap() {
 /*
  * This creates a text box for each place found, it will then find it using the
  * makeinfobox function
- * 
+ *
  */
-            var textbox = '<center><p>' + markers[markerindi].title + '</p><button onclick="myStorePlace( markers[' + markerindi + '])">Add to Places</button></center>'
-            makeinfobox(markers[markerindi], textbox);
+            //'<center><p>' + markers[markerindi].title + '</p><button onclick="myStorePlace( markers[' + markerindi + '])">Add to Places</button></center>'
+            var textBox = document.createElement("div");
+            textBox.id = 'titleName';
+
+            var $titleName = $('<p>').text(markers[markerindi].title);
+            $($titleName).addClass('mapPopup mapPopupTitle');
+            var $titleCommand = $('<p>').text('Add to places');
+            $($titleCommand).addClass('mapPopup');
+
+            $(textBox).append($titleName,$titleCommand);
+            // Add event handler for $textBox
+            $(textBox).on('click',function(){
+              myStorePlace( markers[markerindi]);
+            });
+
+            makeinfobox(markers[markerindi], textBox);
 
             if (place.geometry.viewport) {
 
@@ -175,6 +188,8 @@ var makeinfobox = function (marker, message) {
  * @param place: geoJSON object with identifing information regarding the saved place
  */
 var myStorePlace = function (place) {
+    // Clear search text field
+    $('#searchbox').val('');
 
     // Create a new id for this object
     var newID = 'id' + tableIndex++;
@@ -216,4 +231,3 @@ var storePlace = function (place) {
         myStoredPlaces[myStoredPlacesNames[i]]
     }
 }
-

@@ -107,6 +107,7 @@ def load_trips():
 @app.route('/saveTrip', methods=['POST'])
 def save_trip():
     received = request.json
+    print received
     username = received['username']
     startLoc = received['startLoc']
     finalLoc = received['finalLoc']

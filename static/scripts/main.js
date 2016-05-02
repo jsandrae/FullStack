@@ -33,7 +33,6 @@ function saveTrip(username){
       startLoc,
       finalLoc;
       console.log(myStoredPlaces)
-debugger;
   // Take places out of an object and place in an array
   for (placeID in myStoredPlaces){
     if (firstID === null){
