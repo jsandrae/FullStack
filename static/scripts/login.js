@@ -116,7 +116,7 @@ function createAccountRequest(username, password){
 		success: function(response) {
 			if(response['status'] === 'OK'){
 				console.log(response)
-				isLoggedIn = true;
+				loggedIn();
 	      saveTrip(username);
 			} else {
 				errorMessage('Sorry, a user by that username already exists','#createButton');
@@ -162,7 +162,7 @@ function validateLogin(username, password){
  */
 function ajaxResponse(isValid, username){
 	if (isValid) {
-		isLoggedIn = true;
+		loggedIn();
 		saveTrip(username);
 	} else {
 		errorMessage('Sorry, incorrect login.','#signInButton');

@@ -54,4 +54,5 @@
 .btn-sign.logout {
 	float: right;
 	margin-right: 7%;
+	display: none;
 }

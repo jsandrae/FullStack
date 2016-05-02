@@ -13,7 +13,7 @@ var debug=true;
  */
 function init(){
   // at start of page, user is not logged in
-  isLoggedIn = false;
+  loggedOut();
   doRevert = false;
   $('div.btn-sign.logout').on('click',function(){console.log('clicked')})
   // add event handler to debug trip button
@@ -81,6 +81,16 @@ function showTrip(placeArray, username){
   });
   // Query server to find all trips for this username
 
+}
+
+function loggedIn(){
+  isLoggedIn = true;
+  $('div.btn-sign.logout').show();
+}
+
+function loggedOut(){
+  isLoggedIn = false;
+  $('div.btn-sign.logout').hide();
 }
 
 /**
