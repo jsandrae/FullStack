@@ -23,7 +23,7 @@ body {
 }
 
 #tfheader {
-  padding: 10px;
+  padding: 10px 0;
   float:right 1px;
   margin-top: 20px;
 }
@@ -74,6 +74,14 @@ a {
   width: 45%;
   height:400px;
   float:left;
+  padding: 2px;
+}
+
+#searchbox {
+  height: 24px;
+  width: 0;
+  border-width: 0;
+  padding: 2px;
 }
 
 #mask {

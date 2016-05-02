@@ -100,5 +100,25 @@ $(document).ready(function(){
   init();
   tieSignIn();
   loginPopup();
+  rescaleWindow();
+});
 
+// Function to change size of window properties
+function rescaleWindow(){
+  // Find map width and assign it to search bar
+  var mapWidth = $('#map').width();
+  $('#searchbox').css('width',mapWidth);
+}
+
+// Function to delay window resizing to a fixed interval to reduce usage
+$(function() {
+    var timer_id;
+    var delay = 200;
+
+    $(window).resize(function() {
+        clearTimeout(timer_id);
+        timer_id = setTimeout(function() {
+            rescaleWindow();
+        }, delay);
+    });
 });
