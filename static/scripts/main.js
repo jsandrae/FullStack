@@ -38,7 +38,7 @@ function init(){
   });
 }
 
-function saveTrip(username){debugger;
+function saveTrip(username){
   var placeObject = {},
       placeID,
       startLoc = null,
@@ -91,25 +91,36 @@ function showTrip(placeArray, username){
     $('#mask').fadeOut(fadeTimer);
   });
   // Query server to find all trips for this username
-  $.ajax({
-    type: 'POST',
-    url: '/loadTrips',
-    data: JSON.stringify({"username":username}),
-    dataType: 'json',
-    contentType: 'application/json; charset=utf-8',
-		success: function(response) {
-      console.log(response)
-      populateTrips(response);
-    },
-    error: function(error) {
-      console.log("Saved Trip error")
-      console.log(error);
-    }
-	});
+  if (debug){
+    $.ajax({
+      type: 'POST',
+      url: '/loadTrips',
+      data: JSON.stringify({"username":username}),
+      dataType: 'json',
+      contentType: 'application/json; charset=utf-8',
+  		success: function(response) {
+        console.log(response)
+        populateTrips(response);
+      },
+      error: function(error) {
+        console.log("Saved Trip error")
+        console.log(error);
+      }
+  	});
+  }
 }
 
+/**
+ * Function to take JSON object and populate a table with the response
+ */
 function populateTrips(response){
-  
+  var $tbody = $('<tbody>');
+  for (property in response){
+    debugger;
+    var username = response.username;
+    var startLoc = response.startLoc;
+    var finalLoc = response.finalLoc;
+  }
 }
 
 function loggedIn(){
