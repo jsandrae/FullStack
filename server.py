@@ -4,7 +4,9 @@ from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, jsonify
 from contextlib import closing
 from mongokit import Connection, Document
-import datetime
+import json
+import bson
+from bson import ObjectId
 
 # configuration
 MONGODB_HOST = 'localhost'
@@ -34,6 +36,12 @@ def max_length(length):
             return True
         raise Exception('%s must be at most %s characters long' % length)
     return validate
+
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
 
 class User(Document):
     __collection__ = 'full_stack'
@@ -78,7 +86,6 @@ def create_account():
     password = received['password']
     newUser = connection.User()
     query = connection.User.find_one({'username':username})
-    print query
     if (query == None):
         newUser['username'] = username
         newUser['password'] = password
@@ -108,50 +115,37 @@ def load_trips():
     username = received['username']
     allTrips = []
     for trip in connection.Trip.find({'username':username}):
+        idJSON = JSONEncoder().encode(trip['_id'])
         trip_entry = {
             'username' : trip['username'],
             'startLoc' : trip['startLoc'],
-            'finalLoc' : trip['finalLoc']
+            'finalLoc' : trip['finalLoc'],
+            '_id' : idJSON
             }
         #append entry to log
         allTrips.append(trip_entry)
-    # create json object to return log
     json_log = {
         'status' : 'OK',
         'trips' : allTrips
     }
     return jsonify(json_log)
 
-    #for trip in received:
-        #print trip
-        #print trip[username]
-    # if received:
-    #     for trip in received:
-    #         trip_entry = {
-    #             'username' : trip['username'],
-    #             'startLoc' : trip['startLoc'],
-    #             'finalLoc' : trip['finalLoc']
-    #             }
-    #         # append entry to log
-    #         allTrips.append(trip_entry)
-    #     # create json object to return log
-    #     json_log = {
-    #         'status' : 'OK',
-    #         'trips' : allTrips
-    #     }
-    #     return jsonify(json_log)
-    # else:
-    #     error = {
-    #         'status' : 'error',
-    #         'msg' : 'unable to retrieve trips'
-    #     }
-    #     return jsonify(error)
+# function to delete a trip from the database
+@app.route('/deleteTrip', methods=['POST'])
+def delete_trip():
+    received = request.json
+    _id = received['_id']
+    trips = connection.Trip.find({'_id':bson.ObjectId(oid=str(_id))})
+    for trip in trips:
+        trip.delete()
+    return jsonify({'status':'OK', 'isValid':'true'})
+
+#function to delete a user from the user database and all of their trips in the trip database
 
 # function to save a trip in the database
 @app.route('/saveTrip', methods=['POST'])
 def save_trip():
     received = request.json
-    print received
     username = received['username']
     startLoc = received['startLoc']
     finalLoc = received['finalLoc']

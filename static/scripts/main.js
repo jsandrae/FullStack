@@ -4,6 +4,7 @@ var isLoggedIn;
 var doRevert;
 var fadeTimer = 200;
 var windowHeight;
+var tripLog; // Dictionary to store table ids for each trip
 
 var debug=true;
 
@@ -119,31 +120,35 @@ function populateTrips(response){
   var i;
   // Clear current trip table if any
   $('table.tripList tbody').empty();
+  // Clear tripLog
+  //tripLog = {};
   for (i=0; i<trips.length; i++){
-    debugger;
     var username = trips[i].username;
     var startLoc = trips[i].startLoc;
     var finalLoc = trips[i].finalLoc;
-    showAllTrips(startLoc,finalLoc, 'tripList'+i)
+    var _id = trips[i]._id;
+    var id = _id.replace(/"/g,'');
+    showAllTrips(startLoc,finalLoc, 'tripList'+i, id)
   }
 }
 
 /**
  * Function to display all trips in a trip summary table
  */
-var showAllTrips = function (startLoc, finalLoc, rowID) {
+var showAllTrips = function (startLoc, finalLoc, rowID, tableID) {
   // Create a new id for this object
   var $newRow = $("<tr>").addClass('trip'); //create a new table row of class trip
   $($newRow).attr('id', rowID); // add the new id to row
   var $start = $('<td>').text(' ' + startLoc + ' ');
   var $destination = $('<td>').text(' ' + finalLoc + ' ');
   var $remove = $('<td>').text(' X ');
+  //triplog[rowID]=tableID;
   // add event handler for removing row from table and data from place object
   $($remove).on('click', function () {
       console.log('clicked')
       // remove table from row
       $('#' + rowID).hide(100);
-      deleteTrip(startLoc, finalLoc);
+      deleteTrip(startLoc, finalLoc, tableID);
   });
   // add elements to row
   $newRow.append($start, $destination, $remove);
@@ -154,10 +159,30 @@ var showAllTrips = function (startLoc, finalLoc, rowID) {
 /**
  * Function to send AJAX request to remove a trip from the database
  */
-function deleteTrip(startLoc, finalLoc){
-
+function deleteTrip(startLoc, finalLoc, tableID){
+  $.ajax({
+    type: 'POST',
+    url: '/deleteTrip',
+    data: JSON.stringify({'_id':tableID}),
+    dataType: 'json',
+    contentType: 'application/json; charset=utf-8',
+		success: function(response) {
+      console.log(response)
+      deleteResponse(startLoc, finalLoc);
+    },
+    error: function(error) {
+      console.log("Saved Trip error")
+      console.log(error);
+    }
+	});
 }
 
+/**
+ * Funtion to notify user that element has been deleted
+ */
+function deleteResponse(startLoc, finalLoc){
+
+}
 
 function loggedIn(username){
   isLoggedIn = true;
