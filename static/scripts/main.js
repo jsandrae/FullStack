@@ -1,12 +1,10 @@
 "use strict";
-//Temporary global varriables for debug purposes
-//var username;
-//var password;
+var sessionUsername;
 var isLoggedIn;
 var doRevert;
 var fadeTimer = 200;
 
-var debug=true;
+var debug=false;
 
 /**
  * Function to initialize the page and set event handlers
@@ -15,7 +13,10 @@ function init(){
   // at start of page, user is not logged in
   loggedOut();
   doRevert = false;
-  $('div.btn-sign.logout').on('click',function(){console.log('clicked')})
+  $('div.btn-sign.logout').on('click',function(){
+    console.log('clicked')
+    loggedOut();
+  });
   // add event handler to debug trip button
   $("a.trip-window").on('click',function(){
     $('#trip-box').fadeIn(fadeTimer);
@@ -123,8 +124,9 @@ function populateTrips(response){
   }
 }
 
-function loggedIn(){
+function loggedIn(username){
   isLoggedIn = true;
+  sessionUsername = username;
   $('div.btn-sign.logout').show();
 }
 
