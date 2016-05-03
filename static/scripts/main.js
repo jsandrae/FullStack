@@ -25,6 +25,17 @@ function init(){
     $('.incorrectMessage').fadeOut(5);
     createAccount();
   });
+  // Add event handler to Save button
+  $('#login-box').on('click','button#signInButton',function() {
+    console.log('signin clicked')
+    // remove any previously added messages
+    $('.incorrectMessage').fadeOut(5);
+    //Saving the username and password
+    var username = $('#username').val();
+    var password = $('#password').val();
+
+    validateLogin(username,password);
+  });
 }
 
 function saveTrip(username){debugger;
@@ -80,7 +91,25 @@ function showTrip(placeArray, username){
     $('#mask').fadeOut(fadeTimer);
   });
   // Query server to find all trips for this username
+  $.ajax({
+    type: 'POST',
+    url: '/loadTrips',
+    data: JSON.stringify({"username":username}),
+    dataType: 'json',
+    contentType: 'application/json; charset=utf-8',
+		success: function(response) {
+      console.log(response)
+      populateTrips(response);
+    },
+    error: function(error) {
+      console.log("Saved Trip error")
+      console.log(error);
+    }
+	});
+}
 
+function populateTrips(response){
+  
 }
 
 function loggedIn(){
@@ -98,7 +127,6 @@ function loggedOut(){
  */
 $(document).ready(function(){
   init();
-  tieSignIn();
   loginPopup();
   rescaleWindow();
 });
