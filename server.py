@@ -22,6 +22,12 @@ app.config.from_object(__name__)
 connection = Connection(app.config['MONGODB_HOST'],
                         app.config['MONGODB_PORT'])
 
+# setup route for favicon
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 def max_length(length):
     def validate(value):
         if len(value) <= length:
@@ -99,9 +105,35 @@ def validate_login():
 @app.route('/loadTrips', methods=['POST'])
 def load_trips():
     received = request.json
+    print received
     username = received['username']
+    print username
     query = connection.Trip.find({'username':username})
     print query
+    allTrips = []
+    for trip in received:
+        print trip
+    # if received:
+    #     for trip in received:
+    #         trip_entry = {
+    #             'username' : trip['username'],
+    #             'startLoc' : trip['startLoc'],
+    #             'finalLoc' : trip['finalLoc']
+    #             }
+    #         # append entry to log
+    #         allTrips.append(trip_entry)
+    #     # create json object to return log
+    #     json_log = {
+    #         'status' : 'OK',
+    #         'trips' : allTrips
+    #     }
+    #     return jsonify(json_log)
+    # else:
+    #     error = {
+    #         'status' : 'error',
+    #         'msg' : 'unable to retrieve trips'
+    #     }
+    #     return jsonify(error)
 
 # function to save a trip in the database
 @app.route('/saveTrip', methods=['POST'])

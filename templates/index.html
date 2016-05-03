@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../static/style/main.css">
     <link rel="stylesheet" type="text/css" href="../static/style/buttons.css">
     <link rel="stylesheet" type="text/css" href="../static/style/submit.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title> Plan your Roadtrip </title>
   </head>
   <body>
@@ -74,6 +75,8 @@
               <thead>
                 <tr>
                   <th>Places</th>
+                  <th>Start</th>
+                  <th>Destination</th>
                   <th>Delete</th>
                 </tr>
               </thead>
@@ -119,7 +122,6 @@
     <script type="text/javascript" src="../static/scripts/main.js"></script>
     <script type="text/javascript" src="../static/scripts/login.js"></script>
     <script type="text/javascript" src="../static/scripts/map.js"></script>
-    <script type="text/javascript" src="../static/scripts/list.js"></script>
     <script type="text/javascript" src="../static/scripts/build/circular-json.js"></script>
   </body>
 </html>

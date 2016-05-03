@@ -22,6 +22,8 @@ function loginPopup() {
 			$('body').append('<div id="mask"></div>');
 			$('#mask').fadeIn(fadeTimer);
 
+		} else {
+			saveTrip(sessionUsername);
 		}
 	});
 	// When clicking on the button close or the mask layer the popup closed
@@ -116,7 +118,7 @@ function createAccountRequest(username, password){
 		success: function(response) {
 			if(response['status'] === 'OK'){
 				console.log(response)
-				loggedIn();
+				loggedIn(username);
 	      saveTrip(username);
 			} else {
 				errorMessage('Sorry, a user by that username already exists','#createButton');
@@ -162,7 +164,7 @@ function validateLogin(username, password){
  */
 function ajaxResponse(isValid, username){
 	if (isValid) {
-		loggedIn();
+		loggedIn(username);
 		saveTrip(username);
 	} else {
 		errorMessage('Sorry, incorrect login.','#signInButton');

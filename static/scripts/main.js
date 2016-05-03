@@ -1,12 +1,10 @@
 "use strict";
-//Temporary global varriables for debug purposes
-//var username;
-//var password;
+var sessionUsername;
 var isLoggedIn;
 var doRevert;
 var fadeTimer = 200;
 
-var debug=true;
+var debug=false;
 
 /**
  * Function to initialize the page and set event handlers
@@ -15,7 +13,10 @@ function init(){
   // at start of page, user is not logged in
   loggedOut();
   doRevert = false;
-  $('div.btn-sign.logout').on('click',function(){console.log('clicked')})
+  $('div.btn-sign.logout').on('click',function(){
+    console.log('clicked')
+    loggedOut();
+  });
   // add event handler to debug trip button
   $("a.trip-window").on('click',function(){
     $('#trip-box').fadeIn(fadeTimer);
@@ -25,9 +26,20 @@ function init(){
     $('.incorrectMessage').fadeOut(5);
     createAccount();
   });
+  // Add event handler to Save button
+  $('#login-box').on('click','button#signInButton',function() {
+    console.log('signin clicked')
+    // remove any previously added messages
+    $('.incorrectMessage').fadeOut(5);
+    //Saving the username and password
+    var username = $('#username').val();
+    var password = $('#password').val();
+
+    validateLogin(username,password);
+  });
 }
 
-function saveTrip(username){debugger;
+function saveTrip(username){
   var placeObject = {},
       placeID,
       startLoc = null,
@@ -80,11 +92,41 @@ function showTrip(placeArray, username){
     $('#mask').fadeOut(fadeTimer);
   });
   // Query server to find all trips for this username
-
+  if (debug){
+    $.ajax({
+      type: 'POST',
+      url: '/loadTrips',
+      data: JSON.stringify({"username":username}),
+      dataType: 'json',
+      contentType: 'application/json; charset=utf-8',
+  		success: function(response) {
+        console.log(response)
+        populateTrips(response);
+      },
+      error: function(error) {
+        console.log("Saved Trip error")
+        console.log(error);
+      }
+  	});
+  }
 }
 
-function loggedIn(){
+/**
+ * Function to take JSON object and populate a table with the response
+ */
+function populateTrips(response){
+  var $tbody = $('<tbody>');
+  for (property in response){
+    debugger;
+    var username = response.username;
+    var startLoc = response.startLoc;
+    var finalLoc = response.finalLoc;
+  }
+}
+
+function loggedIn(username){
   isLoggedIn = true;
+  sessionUsername = username;
   $('div.btn-sign.logout').show();
 }
 
@@ -98,7 +140,6 @@ function loggedOut(){
  */
 $(document).ready(function(){
   init();
-  tieSignIn();
   loginPopup();
   rescaleWindow();
 });
