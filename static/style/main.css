@@ -70,6 +70,17 @@ a {
     position: relative;
 }
 
+#tripTable {
+  overflow-y: scroll;
+  width: 90%;
+  margin: auto;
+}
+
+#tripMain {
+  width: 55%;
+  margin: auto;
+}
+
 #map {
   width: 45%;
   height:400px;
@@ -107,7 +118,7 @@ a {
 
 a.close{
 	float:right;
-	margin-right: 15px;
+	margin-right: 0;
 }
 
 p.mapPopup.mapPopupTitle{

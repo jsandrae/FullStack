@@ -5,6 +5,11 @@ table.one {
   position: relative;
 }
 
+table.tripList {
+  max-height: 85%;
+  margin: auto;
+}
+
 table a:link {
   color: #666;
   font-weight: bold;

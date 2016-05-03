@@ -3,8 +3,9 @@ var sessionUsername;
 var isLoggedIn;
 var doRevert;
 var fadeTimer = 200;
+var windowHeight;
 
-var debug=false;
+var debug=true;
 
 /**
  * Function to initialize the page and set event handlers
@@ -92,23 +93,21 @@ function showTrip(placeArray, username){
     $('#mask').fadeOut(fadeTimer);
   });
   // Query server to find all trips for this username
-  if (debug){
-    $.ajax({
-      type: 'POST',
-      url: '/loadTrips',
-      data: JSON.stringify({"username":username}),
-      dataType: 'json',
-      contentType: 'application/json; charset=utf-8',
-  		success: function(response) {
-        console.log(response)
-        populateTrips(response);
-      },
-      error: function(error) {
-        console.log("Saved Trip error")
-        console.log(error);
-      }
-  	});
-  }
+  $.ajax({
+    type: 'POST',
+    url: '/loadTrips',
+    data: JSON.stringify({"username":username}),
+    dataType: 'json',
+    contentType: 'application/json; charset=utf-8',
+		success: function(response) {
+      console.log(response)
+      populateTrips(response);
+    },
+    error: function(error) {
+      console.log("Saved Trip error")
+      console.log(error);
+    }
+	});
 }
 
 /**
@@ -116,13 +115,49 @@ function showTrip(placeArray, username){
  */
 function populateTrips(response){
   var $tbody = $('<tbody>');
-  for (property in response){
+  var trips = response['trips'];
+  var i;
+  // Clear current trip table if any
+  $('table.tripList tbody').empty();
+  for (i=0; i<trips.length; i++){
     debugger;
-    var username = response.username;
-    var startLoc = response.startLoc;
-    var finalLoc = response.finalLoc;
+    var username = trips[i].username;
+    var startLoc = trips[i].startLoc;
+    var finalLoc = trips[i].finalLoc;
+    showAllTrips(startLoc,finalLoc, 'tripList'+i)
   }
 }
+
+/**
+ * Function to display all trips in a trip summary table
+ */
+var showAllTrips = function (startLoc, finalLoc, rowID) {
+  // Create a new id for this object
+  var $newRow = $("<tr>").addClass('trip'); //create a new table row of class trip
+  $($newRow).attr('id', rowID); // add the new id to row
+  var $start = $('<td>').text(' ' + startLoc + ' ');
+  var $destination = $('<td>').text(' ' + finalLoc + ' ');
+  var $remove = $('<td>').text(' X ');
+  // add event handler for removing row from table and data from place object
+  $($remove).on('click', function () {
+      console.log('clicked')
+      // remove table from row
+      $('#' + rowID).hide(100);
+      deleteTrip(startLoc, finalLoc);
+  });
+  // add elements to row
+  $newRow.append($start, $destination, $remove);
+  $('table.tripList tbody').append($newRow);
+  //other stuff
+}
+
+/**
+ * Function to send AJAX request to remove a trip from the database
+ */
+function deleteTrip(startLoc, finalLoc){
+
+}
+
 
 function loggedIn(username){
   isLoggedIn = true;
@@ -149,6 +184,12 @@ function rescaleWindow(){
   // Find map width and assign it to search bar
   var mapWidth = $('#map').width();
   $('#searchbox').css('width',mapWidth);
+  windowHeight = $(window).height();
+  var tableHeight = Math.floor(windowHeight * 0.85);
+  var tableMargin = Math.floor((windowHeight-tableHeight)/2);
+  $('#tripTable').css('max-height',tableHeight);
+  $('#trip-box').css('margin-top',tableMargin);
+  $('#trip-box').css('margin-bottom',tableMargin);
 }
 
 // Function to delay window resizing to a fixed interval to reduce usage

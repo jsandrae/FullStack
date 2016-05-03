@@ -105,14 +105,26 @@ def validate_login():
 @app.route('/loadTrips', methods=['POST'])
 def load_trips():
     received = request.json
-    print received
     username = received['username']
-    print username
-    query = connection.Trip.find({'username':username})
-    print query
     allTrips = []
-    for trip in received:
-        print trip
+    for trip in connection.Trip.find({'username':username}):
+        trip_entry = {
+            'username' : trip['username'],
+            'startLoc' : trip['startLoc'],
+            'finalLoc' : trip['finalLoc']
+            }
+        #append entry to log
+        allTrips.append(trip_entry)
+    # create json object to return log
+    json_log = {
+        'status' : 'OK',
+        'trips' : allTrips
+    }
+    return jsonify(json_log)
+
+    #for trip in received:
+        #print trip
+        #print trip[username]
     # if received:
     #     for trip in received:
     #         trip_entry = {
